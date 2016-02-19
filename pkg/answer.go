@@ -2,6 +2,8 @@ package pkg
 
 import "regexp"
 
+var inanswer = false
+
 func AnswerFilter(k string, v interface{}, format string, meta interface{}) interface{} {
 	pattern1 := regexp.MustCompile("<!-- BEGIN ANSWER -->")
 	pattern2 := regexp.MustCompile("<!-- END ANSWER -->")
@@ -11,15 +13,15 @@ func AnswerFilter(k string, v interface{}, format string, meta interface{}) inte
 
 		if format == "html" {
 			if "" != pattern1.FindString(s) {
-				incomment = true
+				inanswer = true
 				return nil
 			} else if "" != pattern2.FindString(s) {
-				incomment = false
+				inanswer = false
 				return nil
 			}
 		}
 	}
-	if incomment {
+	if inanswer {
 		return []interface{}{}
 	}
 	return nil

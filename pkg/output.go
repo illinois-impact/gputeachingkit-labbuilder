@@ -1,6 +1,5 @@
 package pkg
 
-
 func OutputPDF() (string, error) {
 	return "", nil
 }

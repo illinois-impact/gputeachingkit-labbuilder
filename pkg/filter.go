@@ -1,30 +1,20 @@
 package pkg
 
-
 import (
-"sync"
+	pf "gitlab.com/abduld/wgx-labpdf/pkg/pandocfilter"
+	"sync"
 )
-
-type Filter interface {
-	Action(key string, value interface{}, format string, meta interface{}) interface{}
-}
-
-type FilterFunc func(key string, value interface{}, format string, meta interface{})  interface{}
-
-func (f FilterFunc) Action(key string, value interface{}, format string, meta interface{}) interface{} {
-	return f(key, value, format, meta)
-}
 
 var (
-	filters = []Filter{}
-	mutex sync.Mutex
+	Filters = []pf.Action{}
+	mutex   sync.Mutex
 )
 
-func AddFilter(filter FilterFunc) {
+func AddFilter(filter pf.Action) {
 	mutex.Lock()
 	defer mutex.Unlock()
 
-	filters = append(filters, filter)
+	Filters = append(Filters, filter)
 }
 
 func init() {

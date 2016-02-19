@@ -4,18 +4,18 @@ import "github.com/GeertJohan/go.rice"
 
 type Resource struct {
 	FileName string
-	Content string
+	Content  string
 }
 
-var latexTemplateResources  []Resource
+var latexTemplateResources []Resource
 
 func init() {
 	templateBox := rice.MustFindBox("latex_template")
 
-	getResource := func (filename string ) Resource {
+	getResource := func(filename string) Resource {
 		return Resource{
-			FileName:  filename,
-			Content: templateBox.MustString(filename),
+			FileName: filename,
+			Content:  templateBox.MustString(filename),
 		}
 	}
 
