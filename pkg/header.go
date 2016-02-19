@@ -2,20 +2,22 @@ package pkg
 
 
 import (
-	pf "github.com/oltolm/go-pandocfilters"
+	pf "gitlab.com/abduld/wgx-labpdf/pkg/pandocfilter"
 )
 
 func HeaderFilter(k string, v interface{}, format string, meta interface{}) interface{} {
-	if k == "Header" {
-		var level int = v.([]interface{})[0].(int)
-		var attrs []interface{} = v.([]interface{})[1].([]interface{})
-		var inlines []interface{} = v.([]interface{})[2].([]interface{})
 
-		return pf.Header(level-1, attrs, inlines)
+	if k == "Header" {
+		level := v.([]interface{})[0].(float64)
+		attrs:= v.([]interface{})[1].([]interface{})
+		inlines := v.([]interface{})[2].([]interface{})
+
+		return pf.Header(int(level)-1, attrs, inlines)
 	}
 
 	return nil
 }
+
 
 func init() {
 	AddFilter(HeaderFilter)
