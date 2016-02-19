@@ -9,18 +9,17 @@ import (
 
 func main() {
 	decoder := json.NewDecoder(os.Stdin)
-	var data []interface{}
 	var doc interface{}
-	decoder.Decode(&data)
+	decoder.Decode(&doc)
 	var format string
 	if len(os.Args) > 1 {
 		format = os.Args[1]
 	} else {
 		format = ""
 	}
-	doc = data
+	meta := doc.([]interface{})[0].(map[string]interface{})["unMeta"]
 	for _, filter := range pkg.Filters {
-		doc = pf.Walk(doc, filter, format, data[0].(map[string]interface{})["unMeta"])
+		doc = pf.Walk(doc, filter, format, meta)
 	}
 	encoder := json.NewEncoder(os.Stdout)
 	encoder.Encode(doc)
