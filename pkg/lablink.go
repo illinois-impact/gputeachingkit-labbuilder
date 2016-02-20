@@ -1,8 +1,9 @@
 package pkg
 
 import (
-	pf "gitlab.com/abduld/wgx-labpdf/pkg/pandocfilter"
 	"strconv"
+
+	pf "gitlab.com/abduld/wgx-pandoc/pkg/pandocfilter"
 )
 
 const BitbucketURL = "https://bitbucket.org/hwuligans/gputeachingkit-labs/src/master/"
@@ -12,7 +13,7 @@ func LabLinkFilter(k string, v interface{}, format string, meta interface{}) int
 	if k == "Str" {
 		value := v.(string)
 		if value == "LINKTOLAB" {
-			return pf.Str(BitbucketURL + strconv.Itoa(LabNumber))
+			return pf.Str(BitbucketURL + strconv.Itoa(Lab.Number))
 		}
 	}
 

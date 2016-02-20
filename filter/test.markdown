@@ -1,6 +1,15 @@
 ---
 title: Device Query
 author: GPU Teaching Kit -- Accelerated Computing
+module: 1
+build:
+    from: markdown+yaml_metadata_block
+    template: resources/template/reveal.template
+    variables:
+        transition: slide
+        css: resources/css/hacking.css
+    type: revealjs
+    standalone: true
 ---
 
 

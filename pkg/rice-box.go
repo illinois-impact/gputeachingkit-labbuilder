@@ -1,8 +1,9 @@
 package pkg
 
 import (
-	"github.com/GeertJohan/go.rice/embedded"
 	"time"
+
+	"github.com/GeertJohan/go.rice/embedded"
 )
 
 func init() {

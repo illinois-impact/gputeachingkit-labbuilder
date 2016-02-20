@@ -1,7 +1,7 @@
 package pkg
 
 import (
-	pf "gitlab.com/abduld/wgx-labpdf/pkg/pandocfilter"
+	pf "gitlab.com/abduld/wgx-pandoc/pkg/pandocfilter"
 )
 
 func HeaderFilter(k string, v interface{}, format string, meta interface{}) interface{} {
