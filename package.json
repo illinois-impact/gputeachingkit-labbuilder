@@ -1,0 +1,23 @@
+{
+  "name": "wgx-pandoc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/hwuligans/wgx-pandoc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/hwuligans/wgx-pandoc#readme",
+  "dependencies": {
+    "mermaid": "^0.5.8",
+    "phantomjs": "^1.9.19"
+  }
+}

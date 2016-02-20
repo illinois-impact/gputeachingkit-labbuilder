@@ -21,3 +21,11 @@ The student is not expected to understand the details of
 the code, but should understand the process of compiling
 and running code that will be used in subsequent modules.
 
+```mermaid
+
+sequenceDiagram
+    Alice->>John: Hello John, how are you?
+    John-->>Alice: Great!
+
+
+```
