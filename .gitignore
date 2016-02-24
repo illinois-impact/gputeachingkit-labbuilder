@@ -27,3 +27,4 @@ _testmain.go
 .srclib-cache/
 .srclib-store/
 node_modules
+vendor/

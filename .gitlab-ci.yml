@@ -1,0 +1,23 @@
+image: golang:1.6
+
+
+stages:
+  - install-environment
+  - build
+  - test
+
+install-environment:
+  stage: install-environment
+  script:
+    - go get github.com/tools/godep
+    - godep restore
+build-code:
+  stage: build
+  script:
+    - cd $CURRENT_BUILD_PATH
+    - go build ./...
+test-code:
+  stage: test
+  script:
+    - cd $CURRENT_BUILD_PATH
+    - go test -v

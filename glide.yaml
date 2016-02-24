@@ -1,0 +1,16 @@
+package: gitlab.com/abduld/wgx-pandoc
+import:
+- package: github.com/GeertJohan/go.rice
+  subpackages:
+  - embedded
+- package: github.com/Sirupsen/logrus
+- package: github.com/bugsnag/osext
+- package: github.com/facebookgo/stack
+- package: github.com/fatih/color
+- package: github.com/k0kubun/pp
+- package: github.com/spf13/cast
+- package: github.com/spf13/cobra
+- package: github.com/spf13/viper
+- package: golang.org/x/net
+  subpackages:
+  - context

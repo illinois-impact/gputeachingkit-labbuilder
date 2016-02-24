@@ -1,0 +1,25 @@
+
+box: golang
+build:
+  steps:
+    - setup-go-workspace:
+        package-dir: gitlab.com/abduld/wgx-docker
+
+    # Gets the dependencies
+    - script:
+        name: godep install
+        code: |
+          go get github.com/tools/godep
+          godep restore
+
+    # Build the project
+    - script:
+        name: go build
+        code: |
+          go build ./...
+
+    # Test the project
+    - script:
+        name: go test
+        code: |
+          go test ./...
