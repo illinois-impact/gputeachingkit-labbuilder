@@ -1,0 +1,35 @@
+---
+title: Module {{.Module}} Lab -- {{.Name}}
+author: GPU Teaching Kit -- Accelerated Computing
+---
+
+{{ .Description }}
+
+#Questions
+
+{{range .QuestionAnswers}}
+(@) {{.Question}}
+
+ANSWER: \textcolor[rgb]{0.9,0.1,0.1}{\textbf{ {{.Answer}} } }
+
+{{end}}
+
+# Code Template
+
+The following code is suggested as a starting point for students. The code handles the import and export
+as well as the checking of the solution. Students are expected to insert their code is the sections
+demarcated with `//@@`. Students expected the other code unchanged. The tutorial page describes the
+functionality of the `wb*` methods.
+```{.cpp .numberLines}
+{{.CodeTemplate}}
+```
+
+# Code Solution
+
+The following is a possible implementation of the lab. This solution is intended for use only by the
+teaching staff and should not be distributed to students.
+
+```{.cpp .numberLines}
+{{.CodeSolution}}
+```
+

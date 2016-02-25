@@ -1,3 +1,4 @@
+//go:generate rice go-embed
 package pkg
 
 import "github.com/GeertJohan/go.rice"
@@ -10,7 +11,7 @@ type Resource struct {
 var latexTemplateResources []Resource
 
 func init() {
-	templateBox := rice.MustFindBox("latex_template")
+	templateBox := rice.MustFindBox("../_fixtures/latex_template")
 
 	getResource := func(filename string) Resource {
 		return Resource{
