@@ -25,6 +25,7 @@ build-code:
   script:
     - glide install
     - go build $(glide novendor)
+    - rm ~/.ssh/id_rsa
 
 test-code:
   stage: test
@@ -32,6 +33,7 @@ test-code:
     - glide install
     - go get github.com/stretchr/testify
     - go test -v $(glide novendor)
+    - rm ~/.ssh/id_rsa
 
 mirror-bitbucket:
   stage: mirror
@@ -40,3 +42,4 @@ mirror-bitbucket:
     - chmod -R 0600 ~/.ssh/
     - git remote add bitbucket git@bitbucket.com:hwuligans/$PROJECT_NAME.git
     - git push bitbucket --mirror
+    - rm ~/.ssh/id_rsa
