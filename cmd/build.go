@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"errors"
-
 	"os"
 
 	"github.com/spf13/cobra"
@@ -12,21 +11,46 @@ import (
 var (
 	buildOutputDir string
 	buildCmd       = &cobra.Command{
-		Use:   "build [./path/to/GPUTeachingKit-Labs]",
-		Short: "Makes the lab using the same mechanism as the make_lab_handout.py",
+		Use:   "build [type] [./path/to/GPUTeachingKit-Labs] -o targetdir",
+		Short: "Builds the lab dpeneding on the type",
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 {
-				return errors.New("you must provide a path to the base directory")
+				return errors.New("you must provide a path to the base teaching kit directory")
 			}
 			return nil
 		},
+	}
+
+	pdfBuildCmd = &cobra.Command{
+		Use:     "pdf [./path/to/GPUTeachingKit-Labs] -o targetdir",
+		Aliases: []string{"PDF"},
+		Short:   "Build the lab in PDF format.",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return build.All(buildOutputDir, args[0])
+			return build.All("pdf", buildOutputDir, args[0])
+		},
+	}
+
+	markdownBuildCmd = &cobra.Command{
+		Use:     "markdown [./path/to/GPUTeachingKit-Labs] -o targetdir",
+		Aliases: []string{"md"},
+		Short:   "Build the lab in Markdown format.",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return build.All("markdown", buildOutputDir, args[0])
+		},
+	}
+
+	htmlBuildCmd = &cobra.Command{
+		Use:     "html [./path/to/GPUTeachingKit-Labs] -o targetdir",
+		Aliases: []string{"web"},
+		Short:   "Build the lab in HTML format.",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return build.All("html", buildOutputDir, args[0])
 		},
 	}
 )
 
 func init() {
-	buildCmd.Flags().StringVarP(&buildOutputDir, "output", "o", os.TempDir(), "The location of the output files.")
+	buildCmd.PersistentFlags().StringVarP(&buildOutputDir, "output", "o", os.TempDir(), "The location of the output files.")
+	buildCmd.AddCommand(pdfBuildCmd, markdownBuildCmd, htmlBuildCmd)
 	RootCmd.AddCommand(buildCmd)
 }

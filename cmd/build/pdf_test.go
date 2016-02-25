@@ -8,8 +8,9 @@ import (
 const techingkitDir = "~/gputeachingkit-labs-develop"
 
 func TestBuildLab(t *testing.T) {
-	Lab("/tmp", filepath.Join(techingkitDir, "/Module2/DeviceQuery/sources.cmake"), nil)
+	cmakeFile := filepath.Join(techingkitDir, "/Module2/DeviceQuery/sources.cmake")
+	PDF("/tmp", cmakeFile, nil)
 }
 func TestBuildAll(t *testing.T) {
-	All("/tmp", techingkitDir)
+	All("pdf", "/tmp", techingkitDir)
 }
