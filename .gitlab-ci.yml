@@ -6,6 +6,9 @@ stages:
   - mirror
 
 before_script:
+  - mkdir -p ~/.ssh
+  - echo "$SSH_KEY" > ~/.ssh/id_rsa
+  - git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com"
   - export GLIDE_VERSION="0.9.0"
   - mkdir -p $GOPATH/src/gitlab.com
   - export PROJECT_NAME=$(basename "$CI_PROJECT_DIR")
@@ -33,8 +36,6 @@ test-code:
 mirror-bitbucket:
   stage: mirror
   script:
-    - mkdir -p ~/.ssh
-    - echo "$BITBUCKET_SSH_KEY" > ~/.ssh/id_rsa
     - ssh-keyscan -H bitbucket.com > ~/.ssh/known_hosts
     - chmod -R 0600 ~/.ssh/
     - git remote add bitbucket git@bitbucket.com:hwuligans/$PROJECT_NAME.git
