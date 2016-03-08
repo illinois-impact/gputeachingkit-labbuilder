@@ -28,3 +28,4 @@ _testmain.go
 .srclib-store/
 node_modules
 vendor/
+test

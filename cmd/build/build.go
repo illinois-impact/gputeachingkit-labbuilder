@@ -29,11 +29,13 @@ func All(targetType, outputDir, inputDir string) error {
 			if !isCmakeLab(cmakeFile) {
 				return
 			}
-			configData, err := ioutil.ReadFile(filepath.Join(filepath.Dir(cmakeFile), "config.json"))
+			descriptionData, err := ioutil.ReadFile(
+				filepath.Join(filepath.Dir(cmakeFile), "description.markdown"),
+			)
 			if err != nil {
 				log.Panic("Cannot read config file for " + cmakeFile)
 			}
-			labName, err := getLabName(string(configData))
+			labName, err := getLabNameFromMarkdown(string(descriptionData))
 			if err != nil {
 				log.Panic("Cannot get lab name for " + cmakeFile)
 			}

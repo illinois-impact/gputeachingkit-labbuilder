@@ -10,6 +10,7 @@ import (
 	"bytes"
 	"text/template"
 
+	log "github.com/Sirupsen/logrus"
 	"github.com/cheggaaa/pb"
 	"github.com/mitchellh/go-homedir"
 )
@@ -68,7 +69,7 @@ func makeDoc(outputDir, cmakeFile string, progress *pb.ProgressBar) (*doc, error
 	rootDir := filepath.Dir(cmakeFile)
 
 	progress.Postfix("Starting ...")
-	configFileName := filepath.Join(rootDir, "config.json")
+	//configFileName := filepath.Join(rootDir, "config.json")
 	descriptionFileName := filepath.Join(rootDir, "description.markdown")
 	questionsFileName := filepath.Join(rootDir, "questions.json")
 	answersFileName := filepath.Join(rootDir, "answers.json")
@@ -99,7 +100,7 @@ func makeDoc(outputDir, cmakeFile string, progress *pb.ProgressBar) (*doc, error
 		}
 		return string(buf)
 	}
-	config := readFile(configFileName)
+	//config := readFile(configFileName)
 	description := readFile(descriptionFileName)
 	questions := readFile(questionsFileName)
 	answers := readFile(answersFileName)
@@ -113,6 +114,14 @@ func makeDoc(outputDir, cmakeFile string, progress *pb.ProgressBar) (*doc, error
 		return nil, err
 	}
 
+	progress.Postfix("Getting lab name ...")
+	labName, err := getLabNameFromMarkdown(string(description))
+	if err != nil {
+		progress.FinishPrint("✖ Failed " + fileName + " while getting the lab name. Error :: " + err.Error())
+		return nil, err
+	}
+	incrementProgress(progress)
+
 	progress.Postfix("Removing title section ...")
 	description = removeTitleYaml(description)
 	incrementProgress(progress)
@@ -121,14 +130,6 @@ func makeDoc(outputDir, cmakeFile string, progress *pb.ProgressBar) (*doc, error
 	moduleNumber, err := getModuleNumber(rootDir)
 	if err != nil {
 		progress.FinishPrint("✖ Failed " + fileName + " while getting the lab module number. Error :: " + err.Error())
-		return nil, err
-	}
-	incrementProgress(progress)
-
-	progress.Postfix("Getting lab name ...")
-	labName, err := getLabName(config)
-	if err != nil {
-		progress.FinishPrint("✖ Failed " + fileName + " while getting the lab name. Error :: " + err.Error())
 		return nil, err
 	}
 	incrementProgress(progress)
@@ -150,4 +151,10 @@ func makeDoc(outputDir, cmakeFile string, progress *pb.ProgressBar) (*doc, error
 		CodeTemplate:    codeTemplate,
 		CodeSolution:    codeSolution,
 	}, nil
+}
+
+func init() {
+	if false {
+		log.Warn("dummy")
+	}
 }

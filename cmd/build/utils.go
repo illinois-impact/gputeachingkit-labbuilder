@@ -11,6 +11,9 @@ import (
 	"strconv"
 	"strings"
 
+	"gopkg.in/yaml.v2"
+
+	log "github.com/Sirupsen/logrus"
 	"github.com/cheggaaa/pb"
 )
 
@@ -41,15 +44,27 @@ func copyFile(trgt, src string) error {
 	return nil
 }
 
-func getLabName(configData string) (string, error) {
+func getLabNameFromConfigJSON(configData string) (string, error) {
 	var config struct {
-		Name string `json:"string`
+		Name string `json:"name"`
 	}
 
 	if err := json.Unmarshal([]byte(configData), &config); err != nil {
 		return "", err
 	}
 	return config.Name, nil
+}
+
+func getLabNameFromMarkdown(mk string) (string, error) {
+	var front struct {
+		Title string `yaml:"title"`
+	}
+	frontmatter := getFrontMatter(mk)
+	if err := yaml.Unmarshal([]byte(frontmatter), &front); err != nil {
+		log.Panic("Cannot get lab title")
+		return "", err
+	}
+	return front.Title, nil
 }
 
 func getQuestionsAnswers(questionsData, answeresData string) ([]questionAnswer, error) {
@@ -86,17 +101,38 @@ func getModuleNumber(path string) (int, error) {
 	return strconv.Atoi(match[1])
 }
 
+func getFrontMatter(description string) string {
+	start := 0
+	end := 0
+	lines := strings.Split(description, "\n")
+	for _, line := range lines {
+		if !strings.HasPrefix(line, "---") {
+			start++
+			break
+		}
+	}
+	end = start
+	for _, line := range lines[start+1:] {
+		if !strings.HasPrefix(line, "---") {
+			end++
+			break
+		}
+	}
+	yml := strings.Join(lines[start:end+1], "\n")
+	return yml
+}
+
 func removeTitleYaml(description string) string {
 	var start, end int
 	lines := strings.Split(description, "\n")
 	for ii, line := range lines {
-		if strings.HasPrefix(line, "---") {
+		if !strings.HasPrefix(line, "---") {
 			start = ii
 			break
 		}
 	}
 	for ii, line := range lines[start+1:] {
-		if strings.HasPrefix(line, "---") {
+		if !strings.HasPrefix(line, "---") {
 			end = start + ii + 1
 			break
 		}
