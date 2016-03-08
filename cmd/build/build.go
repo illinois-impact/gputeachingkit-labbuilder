@@ -1,70 +1,125 @@
 package build
 
 import (
-	"io/ioutil"
-	"path/filepath"
-	"sync"
+        "os"
+        "io/ioutil"
+        "path/filepath"
+        "sync"
 
-	log "github.com/Sirupsen/logrus"
-	"github.com/cheggaaa/pb"
-	"github.com/mattn/go-zglob"
-	"github.com/mitchellh/go-homedir"
+        log "github.com/Sirupsen/logrus"
+        "github.com/cheggaaa/pb"
+        "github.com/mattn/go-zglob"
+        "github.com/mitchellh/go-homedir"
+        "github.com/k0kubun/pp"
 )
 
-func All(targetType, outputDir, inputDir string) error {
-	rootDir, _ := homedir.Expand(inputDir)
-	matches, err := zglob.Glob(filepath.Join(rootDir, "**", "sources.cmake"))
-	if err != nil {
-		return err
-	}
-	var wg sync.WaitGroup
-	wg.Add(len(matches))
+func All(targetType, outputDir0, inputDir string) error {
+        rootDir, _ := homedir.Expand(inputDir)
+        matches, err := zglob.Glob(filepath.Join(rootDir, "**", "sources.cmake"))
+        if err != nil {
+                return err
+        }
+        outputDir, _ := homedir.Expand(outputDir0)
+        if err := os.MkdirAll(outputDir, 0755); err != nil {
+                return err
+        }
+        var wg sync.WaitGroup
+        wg.Add(len(matches))
 
-	bars := []*pb.ProgressBar{}
-	var barsMutex sync.Mutex
-	for ii := range matches {
-		cmakeFile := filepath.Join(rootDir, matches[ii])
-		go func() {
-			defer wg.Done()
-			if !isCmakeLab(cmakeFile) {
-				return
-			}
-			descriptionData, err := ioutil.ReadFile(
-				filepath.Join(filepath.Dir(cmakeFile), "description.markdown"),
-			)
-			if err != nil {
-				log.Panic("Cannot read config file for " + cmakeFile)
-			}
-			labName, err := getLabNameFromMarkdown(string(descriptionData))
-			if err != nil {
-				log.Panic("Cannot get lab name for " + cmakeFile)
-			}
+        bars := []*pb.ProgressBar{}
+        var barsMutex sync.Mutex
+        for ii := range matches {
+                cmakeFile := matches[ii]
+                go func() {
+                        defer wg.Done()
+                        if !isCmakeLab(cmakeFile) {
+                                return
+                        }
+                        descriptionData, err := ioutil.ReadFile(
+                                filepath.Join(filepath.Dir(cmakeFile), "description.markdown"),
+                        )
+                        if err != nil {
+                                log.Panic("Cannot read config file for " + cmakeFile)
+                        }
+                        labName, err := getLabNameFromMarkdown(string(descriptionData))
+                        if err != nil {
+                                log.Panic("Cannot get lab name for " + cmakeFile)
+                        }
+package build
 
-			bar := newProgressBar(labName)
-			barsMutex.Lock()
-			bars = append(bars, bar)
-			barsMutex.Unlock()
-			switch targetType {
-			case "pdf":
-				PDF(outputDir, cmakeFile, bar)
-			case "markdown":
-				Markdown(outputDir, cmakeFile, bar)
-			case "html":
-				HTML(outputDir, cmakeFile, bar)
-			default:
-				log.Panic("Does not understand how to make " + targetType + ". Valid target types are pdf, html, and markdown.")
-			}
+import (
+        "os"
+        "io/ioutil"
+        "path/filepath"
+        "sync"
 
-		}()
-	}
-	pool, err := pb.StartPool(bars...)
+        log "github.com/Sirupsen/logrus"
+        "github.com/cheggaaa/pb"
+        "github.com/mattn/go-zglob"
+        "github.com/mitchellh/go-homedir"
+        "github.com/k0kubun/pp"
+)
 
-	wg.Wait()
+func All(targetType, outputDir0, inputDir string) error {
+        rootDir, _ := homedir.Expand(inputDir)
+        matches, err := zglob.Glob(filepath.Join(rootDir, "**", "sources.cmake"))
+        if err != nil {
+                return err
+        }
+        outputDir, _ := homedir.Expand(outputDir0)
+        if err := os.MkdirAll(outputDir, 0755); err != nil {
+                return err
+        }
+        var wg sync.WaitGroup
+        wg.Add(len(matches))
 
-	pool.Stop()
-	return nil
+        bars := []*pb.ProgressBar{}
+        var barsMutex sync.Mutex
+        for ii := range matches {
+                cmakeFile := matches[ii]
+                go func() {
+                        defer wg.Done()
+                        if !isCmakeLab(cmakeFile) {
+                                return
+                        }
+                        descriptionData, err := ioutil.ReadFile(
+                                filepath.Join(filepath.Dir(cmakeFile), "description.markdown"),
+                        )
+                        if err != nil {
+                                log.Panic("Cannot read config file for " + cmakeFile)
+                        }
+                        labName, err := getLabNameFromMarkdown(string(descriptionData))
+                        if err != nil {
+                                log.Panic("Cannot get lab name for " + cmakeFile)
+                        }
+                       bar := newProgressBar(labName)
+                        barsMutex.Lock()
+                        bars = append(bars, bar)
+                        barsMutex.Unlock()
+                        switch targetType {
+                        case "pdf":
+                                PDF(outputDir, cmakeFile, bar)
+                        case "markdown":
+                                Markdown(outputDir, cmakeFile, bar)
+                        case "html":
+                                HTML(outputDir, cmakeFile, bar)
+                        default:
+                                log.Panic("Does not understand how to make " + targetType + ". Valid target types are pdf, html, and markdown.")
+                        }
+
+                }()
+        }
+        pool, err := pb.StartPool(bars...)
+
+        wg.Wait()
+
+        pool.Stop()
+        return nil
 }
 
 func init() {
-	log.SetLevel(log.DebugLevel)
+        log.SetLevel(log.DebugLevel)
+        if false {
+                pp.Println("dummy")
+        }
 }
