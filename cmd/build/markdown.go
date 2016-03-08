@@ -18,7 +18,7 @@ func Markdown(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, er
 		defer progress.Finish()
 	}
 
-	progress.Postfix("Creating the markdown file...")
+	progressPostfix(progress, "Creating the markdown file...")
 	document, err := doc.markdown()
 	if err != nil {
 		progress.FinishPrint("✖ Failed " + doc.FileName + " to create the markdown file. Error :: " + err.Error())
@@ -26,7 +26,7 @@ func Markdown(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, er
 	}
 	incrementProgress(progress)
 
-	progress.Postfix("Writing Markdown file...")
+	progressPostfix(progress, "Writing Markdown file...")
 	outFile := filepath.Join(outputDir, doc.FileName+".md")
 	ioutil.WriteFile(outFile, []byte(document), 0644)
 	incrementProgress(progress)

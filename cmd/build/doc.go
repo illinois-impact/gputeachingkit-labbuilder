@@ -68,7 +68,7 @@ func makeDoc(outputDir, cmakeFile string, progress *pb.ProgressBar) (*doc, error
 
 	rootDir := filepath.Dir(cmakeFile)
 
-	progress.Postfix("Starting ...")
+	progressPostfix(progress, "Starting ...")
 	//configFileName := filepath.Join(rootDir, "config.json")
 	descriptionFileName := filepath.Join(rootDir, "description.markdown")
 	questionsFileName := filepath.Join(rootDir, "questions.json")
@@ -84,7 +84,7 @@ func makeDoc(outputDir, cmakeFile string, progress *pb.ProgressBar) (*doc, error
 		codeSolutionFileName = filepath.Join(rootDir, "solution.cpp")
 	}
 
-	progress.Postfix("Reading Files ...")
+	progressPostfix(progress, "Reading Files ...")
 	readFile := func(pth string) string {
 		if err != nil {
 			return ""
@@ -114,7 +114,7 @@ func makeDoc(outputDir, cmakeFile string, progress *pb.ProgressBar) (*doc, error
 		return nil, err
 	}
 
-	progress.Postfix("Getting lab name ...")
+	progressPostfix(progress, "Getting lab name ...")
 	labName, err := getLabNameFromMarkdown(string(description))
 	if err != nil {
 		progress.FinishPrint("✖ Failed " + fileName + " while getting the lab name. Error :: " + err.Error())
@@ -122,11 +122,11 @@ func makeDoc(outputDir, cmakeFile string, progress *pb.ProgressBar) (*doc, error
 	}
 	incrementProgress(progress)
 
-	progress.Postfix("Removing title section ...")
+	progressPostfix(progress, "Removing title section ...")
 	description = removeTitleYaml(description)
 	incrementProgress(progress)
 
-	progress.Postfix("Getting module number ...")
+	progressPostfix(progress, "Getting module number ...")
 	moduleNumber, err := getModuleNumber(rootDir)
 	if err != nil {
 		progress.FinishPrint("✖ Failed " + fileName + " while getting the lab module number. Error :: " + err.Error())
@@ -134,7 +134,7 @@ func makeDoc(outputDir, cmakeFile string, progress *pb.ProgressBar) (*doc, error
 	}
 	incrementProgress(progress)
 
-	progress.Postfix("Getting questions and answers ...")
+	progressPostfix(progress, "Getting questions and answers ...")
 	questionAnswers, err := getQuestionsAnswers(questions, answers)
 	if err != nil {
 		progress.FinishPrint("✖ Failed " + fileName + " while getting the questions and answers. Error :: " + err.Error())

@@ -11,7 +11,7 @@ import (
 )
 
 func buildPDF(doc *doc, document string, progress *pb.ProgressBar) (string, error) {
-	progress.Postfix("Creating temporary directory...")
+	progressPostfix(progress, "Creating temporary directory...")
 	tmpDir, err := ioutil.TempDir("", doc.FileName+"-build")
 	if err != nil {
 		progress.FinishPrint("✖ Failed to create temporary directory. Error :: " + err.Error())
@@ -24,12 +24,12 @@ func buildPDF(doc *doc, document string, progress *pb.ProgressBar) (string, erro
 	texFileName := fileBaseName + ".tex"
 	pdfFileName := fileBaseName + ".pdf"
 
-	progress.Postfix("Writing resources to temporary directory...")
+	progressPostfix(progress, "Writing resources to temporary directory...")
 	writeLatexResources(tmpDir)
 	ioutil.WriteFile(mdFileName, []byte(document), 0644)
 	incrementProgress(progress)
 
-	progress.Postfix("Generating TeX file...")
+	progressPostfix(progress, "Generating TeX file...")
 	cmd := exec.Command("pandoc",
 		"-s",
 		"-N",
@@ -50,7 +50,7 @@ func buildPDF(doc *doc, document string, progress *pb.ProgressBar) (string, erro
 	}
 	incrementProgress(progress)
 
-	progress.Postfix("Generating PDF file...")
+	progressPostfix(progress, "Generating PDF file...")
 	cmd = exec.Command("pdflatex",
 		texFileName,
 		"-o",
@@ -63,7 +63,8 @@ func buildPDF(doc *doc, document string, progress *pb.ProgressBar) (string, erro
 		ioutil.WriteFile(fileBaseName+".gen.pdf.log", []byte(out), 0644)
 	}
 	if err != nil {
-		progress.FinishPrint("✖ Failed to generate PDF file. Error :: " + err.Error())
+		progress.FinishPrint("✖ Failed to generate PDF file. Error :: " +
+			err.Error() + ". pdflatex output = " + string(out))
 		return "", err
 	}
 	incrementProgress(progress)
@@ -81,7 +82,7 @@ func PDF(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error) 
 		defer progress.Finish()
 	}
 
-	progress.Postfix("Creating the markdown file...")
+	progressPostfix(progress, "Creating the markdown file...")
 	document, err := doc.markdown()
 	if err != nil {
 		progress.FinishPrint("✖ Failed " + doc.FileName + " to create the tex file. Error :: " + err.Error())
@@ -89,7 +90,7 @@ func PDF(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error) 
 	}
 	incrementProgress(progress)
 
-	progress.Postfix("Building PDF file...")
+	progressPostfix(progress, "Building PDF file...")
 	pdfFile, err := buildPDF(doc, document, progress)
 	if err != nil {
 		progress.FinishPrint("✖ Failed " + doc.FileName + " to create pdf output. Error :: " + err.Error())
@@ -97,7 +98,7 @@ func PDF(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error) 
 	}
 	incrementProgress(progress)
 
-	progress.Postfix("Copying the output file to destination directory...")
+	progressPostfix(progress, "Copying the output file to destination directory...")
 	outFile := filepath.Join(outputDir, doc.FileName+".pdf")
 	if err = copyFile(outFile, pdfFile); err != nil {
 		progress.FinishPrint("✖ Failed " + doc.FileName + " to copy the output file. Error :: " + err.Error())

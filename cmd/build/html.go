@@ -23,7 +23,7 @@ func HTML(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error)
 		defer progress.Finish()
 	}
 
-	progress.Postfix("Creating the markdown file...")
+	progressPostfix(progress, "Creating the markdown file...")
 	document, err := doc.markdown()
 	if err != nil {
 		progress.FinishPrint("✖ Failed " + doc.FileName + " to create the tex file. Error :: " + err.Error())
@@ -31,7 +31,7 @@ func HTML(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error)
 	}
 	incrementProgress(progress)
 
-	progress.Postfix("Building HTML file...")
+	progressPostfix(progress, "Building HTML file...")
 	htmlRenderer := blackfriday.HtmlRenderer(htmlFlags, doc.Name, "")
 	data := blackfriday.Markdown([]byte(document), htmlRenderer, blackfridayExtensions)
 	if err != nil {
@@ -40,7 +40,7 @@ func HTML(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error)
 	}
 	incrementProgress(progress)
 
-	progress.Postfix("Copying the output file to destination directory...")
+	progressPostfix(progress, "Copying the output file to destination directory...")
 	outFile := filepath.Join(outputDir, doc.FileName+".html")
 	if err = ioutil.WriteFile(outFile, data, 0644); err != nil {
 		progress.FinishPrint("✖ Failed " + doc.FileName + " to write the output file. Error :: " + err.Error())

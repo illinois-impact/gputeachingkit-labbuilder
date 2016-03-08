@@ -10,6 +10,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 
 	"gopkg.in/yaml.v2"
 
@@ -147,9 +148,12 @@ func writeLatexResources(dir string) {
 }
 
 func newProgressBar(prefix string) *pb.ProgressBar {
+
 	progress := pb.New(17)
 	progress.Prefix(prefix)
 	progress.SetWidth(80)
+	progress.Start()
+	progress.SetRefreshRate(100 * time.Millisecond)
 	progress.AlwaysUpdate = true
 	progress.ShowFinalTime = true
 	return progress
@@ -157,6 +161,13 @@ func newProgressBar(prefix string) *pb.ProgressBar {
 func incrementProgress(progress *pb.ProgressBar) {
 	progress.Increment()
 	progress.Update()
+}
+
+func progressPostfix(progress *pb.ProgressBar, s string) {
+	progress.Increment()
+	if showProgress {
+		progress.Postfix(s)
+	}
 }
 
 func isCmakeLab(cmakeFile string) bool {
