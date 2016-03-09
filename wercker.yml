@@ -3,14 +3,7 @@ box: golang
 build:
   steps:
     - setup-go-workspace:
-        package-dir: gitlab.com/abduld/wgx-docker
-
-    # Gets the dependencies
-    - script:
-        name: godep install
-        code: |
-          go get github.com/tools/godep
-          godep restore
+        package-dir: gitlab.com/abduld/wgx-pandoc
 
     # Build the project
     - script:
