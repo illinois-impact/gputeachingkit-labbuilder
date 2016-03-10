@@ -10,9 +10,11 @@ import:
 - package: github.com/mattn/go-zglob
 - package: github.com/mitchellh/go-homedir
 - package: github.com/russross/blackfriday
+- package: github.com/sethgrid/curse
 - package: github.com/spf13/cast
 - package: github.com/spf13/cobra
-- package: github.com/spf13/viper
+- package: gitlab.com/abduld/wgx-utils
 - package: golang.org/x/net
   subpackages:
   - context
+- package: gopkg.in/yaml.v2
