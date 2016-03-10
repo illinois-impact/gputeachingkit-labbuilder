@@ -18,7 +18,7 @@ func LabLinkFilter(k string, v interface{}, format string, meta interface{}) int
 			} else {
 				url = BitbucketURLEval
 			}
-			url = url + "Module" + strconv.Itoa(Lab.Number)
+			url = url + "Module" + strconv.Itoa(Lab.Module)
 			targets[0] = url
 			res := pf.Link(
 				value[0].([]interface{}),

@@ -1,9 +1,9 @@
 image: golang:1.6
 
 stages:
+  - mirror
   - build
   - test
-  - mirror
 
 before_script:
   - mkdir -p ~/.ssh
