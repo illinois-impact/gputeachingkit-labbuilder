@@ -33,6 +33,8 @@ func buildPDF(doc *doc, document string, progress *pb.ProgressBar) (string, erro
 	cmd := exec.Command("pandoc",
 		"-s",
 		"-N",
+		"-f",
+		"markdown+hard_line_breaks+pandoc_title_block+lists_without_preceding_blankline+compact_definition_lists",
 		"--template="+latexTemplateResources["template.tex"].fileName,
 		mdFileName,
 		"-o",

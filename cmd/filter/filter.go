@@ -23,7 +23,7 @@ func toJSON(inputFilePath string) (string, error) {
 		"-o",
 		outputFile,
 		"-f",
-		"markdown",
+		"markdown+hard_line_breaks+pandoc_title_block+lists_without_preceding_blankline+compact_definition_lists",
 		"-t",
 		"json",
 		inputFilePath,
