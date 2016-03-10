@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/cheggaaa/pb"
+"strconv"
 )
 
 func buildPDF(doc *doc, document string, progress *pb.ProgressBar) (string, error) {
@@ -101,7 +102,7 @@ func PDF(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error) 
 	incrementProgress(progress)
 
 	progressPostfix(progress, "Copying the output file to destination directory...")
-	outFile := filepath.Join(outputDir, doc.FileName+".pdf")
+	outFile := filepath.Join(outputDir, "Module[" + strconv.Itoa(doc.Module) + "]-" +  doc.FileName+".pdf")
 	if err = copyFile(outFile, pdfFile); err != nil {
 		progress.FinishPrint("✖ Failed " + doc.FileName + " to copy the output file. Error :: " + err.Error())
 		return "", err
