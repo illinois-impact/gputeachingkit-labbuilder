@@ -7,6 +7,7 @@ type questionAnswer struct {
 
 type doc struct {
 	Module          int
+	FrontMatter     string
 	FileName        string
 	Name            string
 	Description     string

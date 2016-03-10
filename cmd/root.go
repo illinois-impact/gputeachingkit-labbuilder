@@ -4,13 +4,15 @@ import (
 	"fmt"
 	"os"
 
+	"strings"
+
 	log "github.com/Sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
 
 // This represents the base command when called without any subcommands
 var (
-	debug   bool
+	verbose string
 	RootCmd = &cobra.Command{
 		Use:   "wgx-pandoc",
 		Short: "Helper tools to build lab documentations and interact with pandoc",
@@ -27,14 +29,27 @@ func Execute() {
 }
 
 func init() {
-	buildCmd.PersistentFlags().BoolVarP(&debug, "debug", "d", false, "Enable debug output.")
+	buildCmd.PersistentFlags().StringVarP(&verbose, "verbose", "v", "fatal", "Choose verbosity level [debug,info,warn,error].")
 	cobra.OnInitialize(initConfig)
 
 }
 
 // initConfig reads in config file and ENV variables if set.
 func initConfig() {
-	if debug {
-		log.SetLevel(log.DebugLevel)
+	lvl := log.FatalLevel
+	switch strings.ToLower(verbose) {
+	case "debug":
+		lvl = log.DebugLevel
+	case "info":
+		lvl = log.InfoLevel
+	case "warn":
+		lvl = log.WarnLevel
+	case "error":
+		lvl = log.ErrorLevel
+	case "fatal":
+		lvl = log.FatalLevel
+	default:
+		lvl = log.FatalLevel
 	}
+	log.SetLevel(lvl)
 }

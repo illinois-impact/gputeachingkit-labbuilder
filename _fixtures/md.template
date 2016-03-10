@@ -1,11 +1,10 @@
 ---
-title: Module {{.Module}} Lab -- {{.Name}}
-author: GPU Teaching Kit -- Accelerated Computing
+{{ .FrontMatter }}
 ---
 
 {{ .Description }}
 
-#Questions
+# Questions
 
 {{range .QuestionAnswers}}
 (@) {{.Question}}

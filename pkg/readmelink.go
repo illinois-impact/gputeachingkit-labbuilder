@@ -16,7 +16,7 @@ func ReadmeLinkFilter(k string, v interface{}, format string, meta interface{}) 
 			} else {
 				url = BitbucketURLEval
 			}
-			targets[0] = url + "README"
+			targets[0] = url + "README.md"
 			res := pf.Link(
 				value[0].([]interface{}),
 				value[1].([]interface{}),

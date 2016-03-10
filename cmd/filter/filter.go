@@ -45,7 +45,9 @@ func fromJSON(outputFilePath, inputFilePath string) error {
 		"-f",
 		"json",
 		"-t",
-		"markdown",
+		"markdown+hard_line_breaks+pandoc_title_block+lists_without_preceding_blankline+compact_definition_lists",
+		"-S",
+		"-s",
 		inputFilePath,
 	)
 	cmd.Dir = tmpDir
@@ -78,6 +80,7 @@ func Filter(outputFileDir, inputFilePath string, format string) (string, error) 
 	inputFilePath, _ = filepath.Abs(inputFilePath)
 	jsonOutpuFilePath := filepath.Join(outputFileDir, fileName(inputFilePath)+"-filter.json")
 	outputFilePath := filepath.Join(outputFileDir, fileName(inputFilePath)+"-filter.markdown")
+	log.Debug("Input file is set to " + inputFilePath)
 	log.Debug("Output file is set to " + outputFilePath)
 
 	if !utils.IsFile(inputFilePath) {
@@ -94,6 +97,8 @@ func Filter(outputFileDir, inputFilePath string, format string) (string, error) 
 	} else {
 		jsonInputFilePath = inputFilePath
 	}
+
+	pandoc.Clear()
 
 	inputData, err := ioutil.ReadFile(jsonInputFilePath)
 	if err != nil {

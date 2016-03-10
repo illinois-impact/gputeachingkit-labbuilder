@@ -96,23 +96,22 @@ func getModuleNumber(path string) (int, error) {
 }
 
 func getFrontMatter(description string) string {
-	start := 0
-	end := 0
+	start := 1
 	lines := strings.Split(description, "\n")
 	for _, line := range lines {
-		if !strings.HasPrefix(line, "---") {
-			start++
+		if strings.HasPrefix(line, "---") {
 			break
 		}
+		start++
 	}
-	end = start
+	end := start + 1
 	for _, line := range lines[start+1:] {
-		if !strings.HasPrefix(line, "---") {
-			end++
+		if strings.HasPrefix(line, "---") {
 			break
 		}
+		end++
 	}
-	yml := strings.Join(lines[start:end+1], "\n")
+	yml := strings.Join(lines[start:end], "\n")
 	return yml
 }
 
@@ -125,11 +124,12 @@ func removeTitleYaml(description string) string {
 			break
 		}
 	}
-	for ii, line := range lines[start+1:] {
-		if !strings.HasPrefix(line, "---") {
-			end = start + ii + 1
+	end = start + 1
+	for _, line := range lines[start+1:] {
+		if strings.HasPrefix(line, "---") {
 			break
 		}
+		end++
 	}
 	return strings.Join(lines[end+1:], "\n")
 }

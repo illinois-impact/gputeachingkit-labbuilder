@@ -33,20 +33,23 @@ func LabInfoFilter(k string, v interface{}, format string, meta interface{}) int
 		Lab.Title = pf.Stringify(title)
 	} else {
 		logrus.Error("Cannot find document title in title block.\n")
-		return nil
 	}
 	if module, ok := info["module"]; ok {
-		mod := pf.Stringify(module)
-		mod = strings.TrimSpace(mod)
-		n, err := strconv.Atoi(mod)
-		if err != nil {
-			logrus.Error("The module field in the title is set to '" + mod + "'. Expecting a number.\n")
-			return nil
+		value, ok := module.(map[string]interface{})
+		if ok {
+			mod := value["c"].(string)
+			mod = strings.TrimSpace(mod)
+			n, err := strconv.Atoi(mod)
+			if err != nil {
+				logrus.Error("The module field in the title is set to '" + mod + "'. Expecting a number.\n")
+			} else {
+				Lab.Module = n
+			}
+		} else {
+			logrus.WithField("module", module).Error("The module field in the title is invalid. Expecting a number.\n")
 		}
-		Lab.Module = n
 	} else {
 		logrus.Error("Cannot find module number in title block.")
-		return nil
 	}
 	if author, ok := info["author"]; ok {
 		Lab.Author = pf.Stringify(author)

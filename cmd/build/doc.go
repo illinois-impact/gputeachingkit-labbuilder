@@ -138,6 +138,14 @@ func makeDoc(outputDir, cmakeFile string, progress *pb.ProgressBar) (*doc, error
 		return nil, err
 	}
 
+	progressPostfix(progress, "Getting lab frontmatter ...")
+	frontMatter := getFrontMatter(string(description))
+	if frontMatter == "" {
+		progress.FinishPrint("✖ Failed " + fileName + " while getting the lab front matter.")
+		return nil, err
+	}
+	incrementProgress(progress)
+
 	progressPostfix(progress, "Getting lab name ...")
 	labName, err := getLabNameFromMarkdown(string(description))
 	if err != nil {
@@ -168,6 +176,7 @@ func makeDoc(outputDir, cmakeFile string, progress *pb.ProgressBar) (*doc, error
 
 	return &doc{
 		Module:          moduleNumber,
+		FrontMatter:     frontMatter,
 		FileName:        fileName,
 		Name:            labName,
 		Description:     description,

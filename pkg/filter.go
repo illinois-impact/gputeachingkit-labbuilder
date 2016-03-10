@@ -27,3 +27,8 @@ func init() {
 	logrus.SetLevel(logrus.DebugLevel)
 	ctx = context.Background()
 }
+
+func Clear() {
+	ctx = context.Background()
+	Lab = lab{}
+}

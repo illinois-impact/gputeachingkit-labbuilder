@@ -1,3 +1,5 @@
+//go:generate rice embed-go
+
 package build
 
 import "github.com/GeertJohan/go.rice"

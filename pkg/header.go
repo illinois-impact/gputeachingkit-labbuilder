@@ -11,7 +11,7 @@ func HeaderFilter(k string, v interface{}, format string, meta interface{}) inte
 		attrs := v.([]interface{})[1].([]interface{})
 		inlines := v.([]interface{})[2].([]interface{})
 
-		return pf.Header(int(level)-1, attrs, inlines)
+		return pf.Header(int(level), attrs, inlines)
 	}
 
 	return nil
