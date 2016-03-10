@@ -27,7 +27,7 @@ func Execute() {
 }
 
 func init() {
-	buildCmd.PersistentFlags().BoolVarP(&debug, "debug", "d", true, "Enable debug output.")
+	buildCmd.PersistentFlags().BoolVarP(&debug, "debug", "d", false, "Enable debug output.")
 	cobra.OnInitialize(initConfig)
 
 }

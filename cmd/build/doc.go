@@ -14,6 +14,7 @@ import (
 	"github.com/cheggaaa/pb"
 	"github.com/mitchellh/go-homedir"
 	"gitlab.com/abduld/wgx-pandoc/cmd/filter"
+	"gitlab.com/abduld/wgx-utils"
 )
 
 func (d *doc) markdown() (string, error) {
@@ -100,10 +101,10 @@ func makeDoc(outputDir, cmakeFile string, progress *pb.ProgressBar) (*doc, error
 	codeSolutionFileName := filepath.Join(rootDir, "solution.cu")
 
 	incrementProgress(progress)
-	if !isFile(codeTemplateFileName) {
+	if !utils.IsFile(codeTemplateFileName) {
 		codeTemplateFileName = filepath.Join(rootDir, "template.cpp")
 	}
-	if !isFile(codeSolutionFileName) {
+	if !utils.IsFile(codeSolutionFileName) {
 		codeSolutionFileName = filepath.Join(rootDir, "solution.cpp")
 	}
 
@@ -112,7 +113,7 @@ func makeDoc(outputDir, cmakeFile string, progress *pb.ProgressBar) (*doc, error
 		if err != nil {
 			return ""
 		}
-		if !isFile(pth) {
+		if !utils.IsFile(pth) {
 			err = errors.New("File " + pth + " not found")
 			return ""
 		}

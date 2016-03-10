@@ -1,10 +1,11 @@
 package pandoc
 
 import (
+	"sync"
+
 	"github.com/Sirupsen/logrus"
 	pf "gitlab.com/abduld/wgx-pandoc/pkg/pandocfilter"
 	"golang.org/x/net/context"
-	"sync"
 )
 
 var (

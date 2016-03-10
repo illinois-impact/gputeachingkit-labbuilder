@@ -18,13 +18,6 @@ import (
 	"github.com/cheggaaa/pb"
 )
 
-func isFile(file string) bool {
-	if fi, err := os.Stat(file); err != nil || fi.IsDir() {
-		return false
-	}
-	return true
-}
-
 func copyFile(trgt, src string) error {
 	// open files r and w
 	r, err := os.Open(src)

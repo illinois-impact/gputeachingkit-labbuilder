@@ -1,17 +1,19 @@
 package pandoc
 
 import (
-	"github.com/Sirupsen/logrus"
-	"github.com/bugsnag/osext"
-	"github.com/k0kubun/pp"
-	"github.com/spf13/cast"
-	pf "gitlab.com/abduld/wgx-pandoc/pkg/pandocfilter"
 	"io/ioutil"
 	"os/exec"
 	"path/filepath"
 	"runtime"
 	"strings"
 	"sync"
+
+	"github.com/Sirupsen/logrus"
+	"github.com/bugsnag/osext"
+	"github.com/k0kubun/pp"
+	"github.com/spf13/cast"
+	pf "gitlab.com/abduld/wgx-pandoc/pkg/pandocfilter"
+	"gitlab.com/abduld/wgx-utils"
 )
 
 var (
@@ -35,13 +37,13 @@ func DiagramFilter(k string, v interface{}, format string, meta interface{}) int
 			}
 			if err == nil && runtime.GOOS != "windows" {
 				var nodeModulesDir string
-				if dir := filepath.Join(exeDir, "node_modules"); isDir(dir) {
+				if dir := filepath.Join(exeDir, "node_modules"); utils.IsDir(dir) {
 					nodeModulesDir = dir
-				} else if dir := filepath.Join(exeDir, "..", "node_modules"); isDir(dir) {
+				} else if dir := filepath.Join(exeDir, "..", "node_modules"); utils.IsDir(dir) {
 					nodeModulesDir = dir
 				}
 
-				if nodeModulesDir != "" && isDir(filepath.Join(nodeModulesDir, dirName)) {
+				if nodeModulesDir != "" && utils.IsDir(filepath.Join(nodeModulesDir, dirName)) {
 					return filepath.Join(nodeModulesDir, dirName, "bin", exe), nil
 				}
 			}
