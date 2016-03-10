@@ -1,4 +1,4 @@
-package pkg
+package pandoc
 
 import (
 	pf "gitlab.com/abduld/wgx-pandoc/pkg/pandocfilter"

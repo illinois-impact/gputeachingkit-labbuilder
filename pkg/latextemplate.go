@@ -1,5 +1,5 @@
 //go:generate rice go-embed
-package pkg
+package pandoc
 
 import "github.com/GeertJohan/go.rice"
 

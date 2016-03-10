@@ -4,7 +4,7 @@
 //lines by themselves, with blank lines surrounding
 //them.
 
-package pkg
+package pandoc
 
 import "regexp"
 

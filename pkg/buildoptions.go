@@ -1,17 +1,17 @@
-package pkg
+package pandoc
 
 import (
-	"golang.org/x/net/context"
+	"github.com/Sirupsen/logrus"
 	"github.com/k0kubun/pp"
-"github.com/Sirupsen/logrus"
 	pf "gitlab.com/abduld/wgx-pandoc/pkg/pandocfilter"
+	"golang.org/x/net/context"
 )
 
 type buildOptions struct {
-	From string
-	Template string
-	Variables map[string]string
-	Type string
+	From       string
+	Template   string
+	Variables  map[string]string
+	Type       string
 	Standalone bool
 }
 
@@ -29,14 +29,15 @@ func BuildOptionsFilter(k string, v interface{}, format string, meta interface{}
 	}
 
 	if _, ok := info["build"]; !ok {
-		logrus.Fatal("Cannot find document build in title block.\n")
+		logrus.Error("Cannot find document build in title block.\n")
+		return nil
 	}
 	metamap := info["build"].(map[string]interface{})
 	if _, ok := metamap["c"]; !ok {
-		logrus.Fatal("Invalid document build format in title block.\n")
+		logrus.Error("Invalid document build format in title block.\n")
+		return nil
 	}
 	build := metamap["c"].(map[string]interface{})
-
 
 	if from, ok := build["from"]; ok {
 		BuildOptions.From = pf.Stringify(from)

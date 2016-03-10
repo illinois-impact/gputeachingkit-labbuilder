@@ -15,10 +15,14 @@ import (
 	"github.com/mitchellh/go-homedir"
 )
 
-var showProgress bool
+var (
+	showProgress   bool
+	filterDocument bool
+)
 
-func All(targetType string, outputDir0 string, showProgress0 bool, inputDir string) error {
+func All(targetType string, outputDir0 string, showProgress0 bool, filterDocument0 bool, inputDir string) error {
 	showProgress = showProgress0
+	filterDocument = filterDocument0
 	rootDir, _ := homedir.Expand(inputDir)
 	matches, err := zglob.Glob(filepath.Join(rootDir, "**", "sources.cmake"))
 	if err != nil {

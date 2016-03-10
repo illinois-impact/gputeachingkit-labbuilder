@@ -1,4 +1,4 @@
-package pkg
+package pandoc
 
 const (
 	exeName = "pandoc"

@@ -1,4 +1,4 @@
-package pkg
+package pandoc
 
 func OutputPDF() (string, error) {
 	return "", nil

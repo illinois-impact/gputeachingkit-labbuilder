@@ -1,4 +1,4 @@
-package pkg
+package pandoc
 
 import (
 	"strconv"
@@ -19,11 +19,11 @@ type lab struct {
 
 var Lab = lab{}
 
-func LabNumberFilter(k string, v interface{}, format string, meta interface{}) interface{} {
-	if _, ok := ctx.Value("VisitedLabNumberFilter").(bool); ok {
+func LabInfoFilter(k string, v interface{}, format string, meta interface{}) interface{} {
+	if _, ok := ctx.Value("VisitedLabInfoFilter").(bool); ok {
 		return nil
 	}
-	ctx = context.WithValue(ctx, "VisitedLabNumberFilter", true)
+	ctx = context.WithValue(ctx, "VisitedLabInfoFilter", true)
 
 	info, ok := meta.(map[string]interface{})
 	if !ok {
@@ -32,18 +32,21 @@ func LabNumberFilter(k string, v interface{}, format string, meta interface{}) i
 	if title, ok := info["title"]; ok {
 		Lab.Title = pf.Stringify(title)
 	} else {
-		logrus.Fatal("Cannot find document title in title block.\n")
+		logrus.Error("Cannot find document title in title block.\n")
+		return nil
 	}
 	if module, ok := info["module"]; ok {
 		mod := pf.Stringify(module)
 		mod = strings.TrimSpace(mod)
 		n, err := strconv.Atoi(mod)
 		if err != nil {
-			logrus.Fatal("The module field in the title is set to '" + mod + "'. Expecting a number.\n")
+			logrus.Error("The module field in the title is set to '" + mod + "'. Expecting a number.\n")
+			return nil
 		}
 		Lab.Module = n
 	} else {
-		logrus.Fatal("Cannot find module number in title block.")
+		logrus.Error("Cannot find module number in title block.")
+		return nil
 	}
 	if author, ok := info["author"]; ok {
 		Lab.Author = pf.Stringify(author)
@@ -57,5 +60,5 @@ func LabNumberFilter(k string, v interface{}, format string, meta interface{}) i
 }
 
 func init() {
-	//AddFilter(LabNumberFilter)
+	AddFilter(LabInfoFilter)
 }

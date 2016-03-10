@@ -4,7 +4,7 @@ import (
 	"errors"
 	"os"
 
-	"github.com/apex/log"
+	log "github.com/Sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"gitlab.com/abduld/wgx-pandoc/cmd/build"
 )
@@ -12,6 +12,7 @@ import (
 var (
 	buildOutputDir string
 	showProgress   bool
+	filterDocument bool
 	buildCmd       = &cobra.Command{
 		Use:   "build [type] [./path/to/GPUTeachingKit-Labs] -o targetdir",
 		Short: "Builds the lab dpeneding on the type",
@@ -28,7 +29,7 @@ var (
 		Aliases: []string{"PDF"},
 		Short:   "Build the lab in PDF format.",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			err := build.All("pdf", buildOutputDir, showProgress, args[0])
+			err := build.All("pdf", buildOutputDir, showProgress, filterDocument, args[0])
 			if err != nil {
 				log.WithError(err).Error("Failed to generate PDF labs")
 				return err
@@ -42,7 +43,7 @@ var (
 		Aliases: []string{"md"},
 		Short:   "Build the lab in Markdown format.",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			err := build.All("markdown", buildOutputDir, showProgress, args[0])
+			err := build.All("markdown", buildOutputDir, showProgress, filterDocument, args[0])
 			if err != nil {
 				log.WithError(err).Error("Failed to generate Markdown labs")
 				return err
@@ -56,7 +57,7 @@ var (
 		Aliases: []string{"web"},
 		Short:   "Build the lab in HTML format.",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			err := build.All("html", buildOutputDir, showProgress, args[0])
+			err := build.All("html", buildOutputDir, showProgress, filterDocument, args[0])
 			if err != nil {
 				log.WithError(err).Error("Failed to generate HTML labs")
 				return err
@@ -69,6 +70,7 @@ var (
 func init() {
 	buildCmd.PersistentFlags().StringVarP(&buildOutputDir, "output", "o", os.TempDir(), "The location of the output files.")
 	buildCmd.PersistentFlags().BoolVarP(&showProgress, "progress", "p", false, "Prints the progress if enabled.")
+	buildCmd.PersistentFlags().BoolVarP(&filterDocument, "filter", "f", true, "Pass the document through the pandoc filters.")
 	buildCmd.AddCommand(pdfBuildCmd, markdownBuildCmd, htmlBuildCmd)
 	RootCmd.AddCommand(buildCmd)
 }

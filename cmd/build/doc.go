@@ -13,6 +13,7 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/cheggaaa/pb"
 	"github.com/mitchellh/go-homedir"
+	"gitlab.com/abduld/wgx-pandoc/cmd/filter"
 )
 
 func (d *doc) markdown() (string, error) {
@@ -22,6 +23,28 @@ func (d *doc) markdown() (string, error) {
 	if err != nil {
 		return "", err
 	}
+
+	if filterDocument {
+		tmpDir, err := ioutil.TempDir("", "wgx-pandoc")
+		if err != nil {
+			return "", err
+		}
+		inputFilePath := filepath.Join(tmpDir, "input.markdown")
+		if err := ioutil.WriteFile(inputFilePath, document.Bytes(), 0644); err != nil {
+			return "", err
+		}
+
+		outputFile, err := filter.Filter(tmpDir, inputFilePath, "")
+		if err != nil {
+			return "", err
+		}
+		buf, err := ioutil.ReadFile(outputFile)
+		if err != nil {
+			return "", err
+		}
+		return string(buf), nil
+	}
+
 	return document.String(), nil
 }
 

@@ -1,4 +1,4 @@
-package pkg
+package pandoc
 
 import (
 	"github.com/Sirupsen/logrus"

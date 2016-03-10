@@ -1,16 +1,18 @@
-package pkg
+package pandoc
 
 import (
-	pf "gitlab.com/abduld/wgx-pandoc/pkg/pandocfilter"
-	"sync"
-"golang.org/x/net/context"
 	"github.com/Sirupsen/logrus"
+	pf "gitlab.com/abduld/wgx-pandoc/pkg/pandocfilter"
+	"golang.org/x/net/context"
+	"sync"
 )
 
 var (
-	Filters = []pf.Action{}
-	mutex   sync.Mutex
-	ctx context.Context
+	Filters = []pf.Action{
+		LabInfoFilter,
+	}
+	mutex sync.Mutex
+	ctx   context.Context
 )
 
 func AddFilter(filter pf.Action) {
