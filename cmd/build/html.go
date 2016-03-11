@@ -45,7 +45,7 @@ func HTML(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error)
 		pandoc.MarkdownFormat,
 		"-c",
 		cssResource.fileName,
-		//"--mathjax='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'",
+		"--katex",
 		"-t",
 		"html5",
 		"--template=" + htmlTemplate.fileName,
