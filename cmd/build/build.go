@@ -8,6 +8,8 @@ import (
 	"path/filepath"
 	"sync"
 
+	"strings"
+
 	log "github.com/Sirupsen/logrus"
 	"github.com/cheggaaa/pb"
 	"github.com/k0kubun/pp"
@@ -18,17 +20,20 @@ import (
 var (
 	showProgress   bool
 	filterDocument bool
+	targetType     string
 )
 
-func All(targetType string, outputDir0 string, showProgress0 bool, filterDocument0 bool, inputDir string) error {
+func All(targetType0 string, outputDir0 string, showProgress0 bool, filterDocument0 bool, inputDir string) error {
 	showProgress = showProgress0
 	filterDocument = filterDocument0
+	targetType = strings.ToLower(targetType0)
 	rootDir, _ := homedir.Expand(inputDir)
 	matches, err := zglob.Glob(filepath.Join(rootDir, "**", "sources.cmake"))
 	if err != nil {
 		return err
 	}
 	outputDir, _ := homedir.Expand(outputDir0)
+	outputDir, _ = filepath.Abs(outputDir)
 	if err := os.MkdirAll(outputDir, 0755); err != nil {
 		log.WithField("output", outputDir).Error("Cannot create output directory")
 		return err
@@ -76,8 +81,15 @@ func All(targetType string, outputDir0 string, showProgress0 bool, filterDocumen
 				Markdown(outputDir, cmakeFile, bar)
 			case "html":
 				HTML(outputDir, cmakeFile, bar)
+			case "blackfriday":
+				Blackfriday(outputDir, cmakeFile, bar)
+			case "rtf":
+				RTF(outputDir, cmakeFile, bar)
+			case "opendocument":
+				OpenDocument(outputDir, cmakeFile, bar)
 			default:
-				log.Panic("Does not understand how to make " + targetType + ". Valid target types are pdf, html, and markdown.")
+				log.Panic("Does not understand how to make " + targetType +
+					". Valid target types are pdf, html, blackfriday, markdown, rtf, and opendocument.")
 			}
 
 		}()

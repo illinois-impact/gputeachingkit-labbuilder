@@ -19,7 +19,12 @@ import (
 
 func (d *doc) markdown() (string, error) {
 	var document bytes.Buffer
-	tmpl := template.Must(template.New(d.Name + "_template").Parse(markdownTemplate))
+	var tmpl *template.Template
+	if targetType == "pdf" {
+		tmpl = template.Must(template.New(d.Name + "_tex_template").Parse(markdownTexTemplate))
+	} else {
+		tmpl = template.Must(template.New(d.Name + "_template").Parse(markdownRegularTemplate))
+	}
 	err := tmpl.Execute(&document, d)
 	if err != nil {
 		return "", err

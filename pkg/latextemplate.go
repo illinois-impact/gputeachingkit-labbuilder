@@ -11,7 +11,7 @@ type Resource struct {
 var latexTemplateResources []Resource
 
 func init() {
-	templateBox := rice.MustFindBox("../_fixtures/latex_template")
+	templateBox := rice.MustFindBox("../_fixtures/templates/latex")
 
 	getResource := func(filename string) Resource {
 		return Resource{

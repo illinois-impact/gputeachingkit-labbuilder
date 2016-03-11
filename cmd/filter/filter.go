@@ -19,15 +19,17 @@ func toJSON(inputFilePath string) (string, error) {
 	tmpDir := os.TempDir()
 	outputFile := filepath.Join(tmpDir, "pandocJsonOutput.json")
 	log.Debug("Generating pandoc json from markdown file")
-	cmd := exec.Command("pandoc",
+	args := []string{
 		"-o",
 		outputFile,
 		"-f",
-		"markdown+hard_line_breaks+pandoc_title_block+lists_without_preceding_blankline+compact_definition_lists",
+		pandoc.MarkdownFormat,
 		"-t",
 		"json",
 		inputFilePath,
-	)
+	}
+	args = append(args, pandoc.DefaultFilter...)
+	cmd := exec.Command("pandoc", args...)
 	cmd.Dir = tmpDir
 	buf, err := cmd.CombinedOutput()
 	log.WithError(err).WithField("command_out", string(buf)).Debug("Ran pandoc to json command")
@@ -39,17 +41,19 @@ func toJSON(inputFilePath string) (string, error) {
 
 func fromJSON(outputFilePath, inputFilePath string) error {
 	tmpDir := os.TempDir()
-	cmd := exec.Command("pandoc",
+	args := []string{
 		"-o",
 		outputFilePath,
 		"-f",
 		"json",
 		"-t",
-		"markdown+hard_line_breaks+pandoc_title_block+lists_without_preceding_blankline+compact_definition_lists",
+		pandoc.MarkdownFormat,
 		"-S",
 		"-s",
 		inputFilePath,
-	)
+	}
+	args = append(args, pandoc.DefaultFilter...)
+	cmd := exec.Command("pandoc", args...)
 	cmd.Dir = tmpDir
 	buf, err := cmd.CombinedOutput()
 	log.WithError(err).WithField("command_out", string(buf)).Debug("Ran pandoc to markdown command")

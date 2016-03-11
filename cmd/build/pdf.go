@@ -7,8 +7,10 @@ import (
 	"os/exec"
 	"path/filepath"
 
+	"strconv"
+
 	"github.com/cheggaaa/pb"
-"strconv"
+	"gitlab.com/abduld/wgx-pandoc/pkg"
 )
 
 func buildPDF(doc *doc, document string, progress *pb.ProgressBar) (string, error) {
@@ -30,17 +32,23 @@ func buildPDF(doc *doc, document string, progress *pb.ProgressBar) (string, erro
 	ioutil.WriteFile(mdFileName, []byte(document), 0644)
 	incrementProgress(progress)
 
+	for key, res := range latexTemplateResources {
+		copyFile(filepath.Join(tmpDir, key), res.fileName)
+	}
+
 	progressPostfix(progress, "Generating TeX file...")
-	cmd := exec.Command("pandoc",
+	args := []string{
 		"-s",
 		"-N",
 		"-f",
-		"markdown+hard_line_breaks+pandoc_title_block+lists_without_preceding_blankline+compact_definition_lists",
-		"--template="+latexTemplateResources["template.tex"].fileName,
+		pandoc.MarkdownFormat,
+		"--template=template.tex",
 		mdFileName,
 		"-o",
 		texFileName,
-	)
+	}
+	args = append(args, pandoc.DefaultFilter...)
+	cmd := exec.Command("pandoc", args...)
 	cmd.Dir = tmpDir
 
 	out, err := cmd.CombinedOutput()
@@ -102,7 +110,7 @@ func PDF(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error) 
 	incrementProgress(progress)
 
 	progressPostfix(progress, "Copying the output file to destination directory...")
-	outFile := filepath.Join(outputDir, "Module[" + strconv.Itoa(doc.Module) + "]-" +  doc.FileName+".pdf")
+	outFile := filepath.Join(outputDir, "Module["+strconv.Itoa(doc.Module)+"]-"+doc.FileName+".pdf")
 	if err = copyFile(outFile, pdfFile); err != nil {
 		progress.FinishPrint("✖ Failed " + doc.FileName + " to copy the output file. Error :: " + err.Error())
 		return "", err

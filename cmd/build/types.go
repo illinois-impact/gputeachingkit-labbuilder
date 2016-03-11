@@ -18,5 +18,6 @@ type doc struct {
 
 type resource struct {
 	fileName string
+	baseName string
 	content  string
 }

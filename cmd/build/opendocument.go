@@ -13,7 +13,7 @@ import (
 	"gitlab.com/abduld/wgx-pandoc/pkg"
 )
 
-func HTML(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error) {
+func OpenDocument(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error) {
 	doc, err := makeDoc(outputDir, cmakeFile, progress)
 	if err != nil {
 		return "", err
@@ -32,10 +32,10 @@ func HTML(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error)
 	incrementProgress(progress)
 
 	progressPostfix(progress, "Writing Markdown file...")
-	outFile := filepath.Join(outputDir, "Module["+strconv.Itoa(doc.Module)+"]-"+doc.FileName+".html")
+	outFile := filepath.Join(outputDir, "Module["+strconv.Itoa(doc.Module)+"]-"+doc.FileName+".docx")
 
 	tmpDir := os.TempDir()
-	tmpOutFile := filepath.Join(tmpDir, "wgx-pandoc-markdown.md")
+	tmpOutFile := filepath.Join(tmpDir, "wgx-pandoc-markdown.markdown")
 	ioutil.WriteFile(tmpOutFile, []byte(document), 0644)
 
 	args := []string{
@@ -44,8 +44,8 @@ func HTML(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error)
 		"-f",
 		pandoc.MarkdownFormat,
 		"-t",
-		"html5",
-		"--template=" + htmlTemplate.fileName,
+		"docx",
+		"--template=" + rtfTemplate.fileName,
 		"-o",
 		outFile,
 		tmpOutFile,
@@ -55,10 +55,10 @@ func HTML(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error)
 	cmd.Dir = tmpDir
 	out, err := cmd.CombinedOutput()
 	if len(out) > 0 {
-		ioutil.WriteFile(filepath.Join(outputDir, doc.FileName+".gen.html.log"), out, 0644)
+		ioutil.WriteFile(filepath.Join(outputDir, doc.FileName+".gen.opendocument.log"), out, 0644)
 	}
 	if err != nil {
-		progress.FinishPrint("✖ Failed to generate HTML file. Error :: " + err.Error())
+		progress.FinishPrint("✖ Failed to generate OpenDocument file. Error :: " + err.Error())
 		return "", err
 	}
 
