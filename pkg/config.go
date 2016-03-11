@@ -13,7 +13,11 @@ const (
 )
 
 var (
-	DefaultFilter = []string{}
+	DefaultFilter = []string{
+		"--highlight-style",
+		"pygments",
+		"--self-contained",
+	}
 	Config        = config{
 		IsFullTookit: true,
 	}

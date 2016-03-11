@@ -19,6 +19,7 @@ var (
 	htmlTemplate           resource
 	rtfTemplate            resource
 	opendocumentTemplate   resource
+	cssResource            resource
 )
 
 func init() {
@@ -47,6 +48,7 @@ func init() {
 		"template.tex":  getTexResource("template.tex"),
 	}
 	htmlTemplate = getResource(htmlTemplateBox, "template.html")
+	cssResource = getResource(htmlTemplateBox, "style.css")
 	rtfTemplate = getResource(rtfTemplateBox, "template.rtf")
 	opendocumentTemplate = getResource(opendocumentTemplateBox, "template.opendocument")
 }
