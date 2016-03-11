@@ -3,6 +3,9 @@
   <office:font-face-decls>
     <style:font-face style:name="Courier New" style:font-family-generic="modern" style:font-pitch="fixed" svg:font-family="'Courier New'" />
   </office:font-face-decls>
+  <style:footer>
+    <text:p text:style-name="Footer">This work is licensed by UIUC and NVIDIA (2016) under a Creative Commons Attribution-NonCommercial 4.0 License.</text:p>
+  </style:footer>
   $automatic-styles$
 $for(header-includes)$
   $header-includes$
@@ -28,6 +31,9 @@ $body$
 $for(include-after)$
 $include-after$
 $endfor$
+
+<text:p>
+<text:span text:style-name="T808">This work is licensed by UIUC and NVIDIA (2016) under a Creative Commons Attribution-NonCommercial 4.0 License.</text:span></text:p>
 </office:text>
 </office:body>
 </office:document-content>
