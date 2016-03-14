@@ -15,6 +15,7 @@ import:
 - package: github.com/spf13/cast
 - package: github.com/spf13/cobra
 - package: gitlab.com/abduld/wgx-log
+- package: gitlab.com/abduld/wgx-md-frontmatter
 - package: gitlab.com/abduld/wgx-utils
 - package: golang.org/x/net
   subpackages:
