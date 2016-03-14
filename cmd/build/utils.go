@@ -16,6 +16,7 @@ import (
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/cheggaaa/pb"
+    "gitlab.com/abduld/wgx-md-frontmatter"
 )
 
 func copyFile(trgt, src string) error {
@@ -96,48 +97,11 @@ func getModuleNumber(path string) (int, error) {
 }
 
 func getFrontMatter(description string) string {
-	start := 1
-	lines := strings.Split(description, "\n")
-	for _, line := range lines {
-		if strings.HasPrefix(line, "---") {
-			break
-		}
-		start++
-	}
-	end := start + 1
-	for _, line := range lines[start+1:] {
-		if strings.HasPrefix(line, "---") || strings.HasPrefix(line, "...") {
-			break
-		}
-		end++
-	}
-	yml := strings.Join(lines[start:end], "\n")
-	return yml
+	return frontmatter.Extract(description)
 }
 
 func removeFrontMatter(description string) string {
-	var start, end int
-	lines := strings.Split(description, "\n")
-	for ii, line := range lines {
-		if !strings.HasPrefix(line, "---") {
-			start = ii
-			break
-		}
-	}
-	end = start + 1
-	for _, line := range lines[start+1:] {
-		if strings.HasPrefix(line, "---") || strings.HasPrefix(line, "...") {
-			break
-		}
-		end++
-	}
-
-	// println("start = ", start)
-	// println("end = ", end)
-	if end < len(lines)-1 {
-		lines = lines[end+1:]
-	}
-	return strings.Join(lines, "\n")
+	return frontmatter.Trim(description)
 }
 
 func writeLatexResources(dir string) {
