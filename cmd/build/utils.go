@@ -106,7 +106,7 @@ func getFrontMatter(description string) string {
 	}
 	end := start + 1
 	for _, line := range lines[start+1:] {
-		if strings.HasPrefix(line, "---") {
+		if strings.HasPrefix(line, "---") || strings.HasPrefix(line, "...") {
 			break
 		}
 		end++
@@ -115,7 +115,7 @@ func getFrontMatter(description string) string {
 	return yml
 }
 
-func removeTitleYaml(description string) string {
+func removeFrontMatter(description string) string {
 	var start, end int
 	lines := strings.Split(description, "\n")
 	for ii, line := range lines {
@@ -126,12 +126,18 @@ func removeTitleYaml(description string) string {
 	}
 	end = start + 1
 	for _, line := range lines[start+1:] {
-		if strings.HasPrefix(line, "---") {
+		if strings.HasPrefix(line, "---") || strings.HasPrefix(line, "...") {
 			break
 		}
 		end++
 	}
-	return strings.Join(lines[end+1:], "\n")
+
+	// println("start = ", start)
+	// println("end = ", end)
+	if end < len(lines)-1 {
+		lines = lines[end+1:]
+	}
+	return strings.Join(lines, "\n")
 }
 
 func writeLatexResources(dir string) {

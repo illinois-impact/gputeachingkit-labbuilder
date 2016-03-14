@@ -160,7 +160,7 @@ func makeDoc(outputDir, cmakeFile string, progress *pb.ProgressBar) (*doc, error
 	incrementProgress(progress)
 
 	progressPostfix(progress, "Removing title section ...")
-	description = removeTitleYaml(description)
+	description = removeFrontMatter(description)
 	incrementProgress(progress)
 
 	progressPostfix(progress, "Getting module number ...")
