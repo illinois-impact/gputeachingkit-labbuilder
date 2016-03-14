@@ -70,14 +70,38 @@ func OpenDocument(outputDir, cmakeFile string, progress *pb.ProgressBar) (string
 	}
 
 	incrementProgress(progress)
+    
+	return outFile, nil
+}
+
+func Docx(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error) {
+
+	doc, err := makeDoc(outputDir, cmakeFile, progress)
+	if err != nil {
+		return "", err
+	}
+	if progress == nil {
+		progress = newProgressBar(doc.FileName)
+		defer progress.Finish()
+	}
+
+	progressPostfix(progress, "Creating the markdown file...")
+	document, err := doc.markdown()
+	if err != nil {
+		progress.FinishPrint("✖ Failed " + doc.FileName + " to create the markdown file. Error :: " + err.Error())
+		return "", err
+	}
+	incrementProgress(progress)
+    
 
 	progressPostfix(progress, "Writing Docx file...")
-
-	tmpOutFile = filepath.Join(tmpDir, "wgx-pandoc-docx-markdown.markdown")
+    
+	tmpDir := os.TempDir()
+	tmpOutFile := filepath.Join(tmpDir, "wgx-pandoc-docx-markdown.markdown")
 	ioutil.WriteFile(tmpOutFile, []byte(document+docxCopyright), 0644)
-	outFile = filepath.Join(outputDir, "Module["+strconv.Itoa(doc.Module)+"]-"+doc.FileName+".docx")
+	outFile := filepath.Join(outputDir, "Module["+strconv.Itoa(doc.Module)+"]-"+doc.FileName+".docx")
 
-	args = []string{
+	args := []string{
 		"-s",
 		"-N",
 		"-f",
@@ -90,9 +114,9 @@ func OpenDocument(outputDir, cmakeFile string, progress *pb.ProgressBar) (string
 		tmpOutFile,
 	}
 	args = append(args, pandoc.DefaultFilter...)
-	cmd = exec.Command("pandoc", args...)
+	cmd := exec.Command("pandoc", args...)
 	cmd.Dir = tmpDir
-	out, err = cmd.CombinedOutput()
+	out, err := cmd.CombinedOutput()
 	if len(out) > 0 {
 		ioutil.WriteFile(filepath.Join(outputDir, doc.FileName+".gen.docx.log"), out, 0644)
 	}

@@ -15,7 +15,7 @@ var (
 	htmlFlags             int
 )
 
-func Blackfriday(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error) {
+func blackfridayCommon(renderer blackfriday.Renderer, outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error) {
 	doc, err := makeDoc(outputDir, cmakeFile, progress)
 	if err != nil {
 		return "", err
@@ -33,9 +33,12 @@ func Blackfriday(outputDir, cmakeFile string, progress *pb.ProgressBar) (string,
 	}
 	incrementProgress(progress)
 
-	progressPostfix(progress, "Building HTML file...")
-	htmlRenderer := blackfriday.HtmlRenderer(htmlFlags, doc.Name, "")
-	data := blackfriday.Markdown([]byte(document), htmlRenderer, blackfridayExtensions)
+    if _, ok := renderer.(*blackfriday.Latex); ok {
+	    progressPostfix(progress, "Building TeX file...")
+    } else {
+	    progressPostfix(progress, "Building HTML file...")
+    }
+	data := blackfriday.Markdown([]byte(document), renderer, blackfridayExtensions)
 	if err != nil {
 		progress.FinishPrint("✖ Failed " + doc.FileName + " to create pdf output. Error :: " + err.Error())
 		return "", err
@@ -43,7 +46,13 @@ func Blackfriday(outputDir, cmakeFile string, progress *pb.ProgressBar) (string,
 	incrementProgress(progress)
 
 	progressPostfix(progress, "Copying the output file to destination directory...")
-	outFile := filepath.Join(outputDir, "Module["+strconv.Itoa(doc.Module)+"]-"+doc.FileName+".html")
+    
+    ext := ".html"
+    if _, ok := renderer.(*blackfriday.Latex); ok {
+        ext = ".tex"
+    }
+    
+	outFile := filepath.Join(outputDir, "Module["+strconv.Itoa(doc.Module)+"]-"+doc.FileName+ext)
 	if err = ioutil.WriteFile(outFile, data, 0644); err != nil {
 		progress.FinishPrint("✖ Failed " + doc.FileName + " to write the output file. Error :: " + err.Error())
 		return "", err
@@ -53,6 +62,17 @@ func Blackfriday(outputDir, cmakeFile string, progress *pb.ProgressBar) (string,
 	progress.FinishPrint("✔ Completed " + doc.Name + " placing target at " + outFile)
 	return outFile, nil
 
+}
+
+func BlackfridayHTML(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error) {
+	renderer := blackfriday.HtmlRenderer(htmlFlags, "HTML", "")
+    return blackfridayCommon(renderer, outputDir, cmakeFile, progress)
+}
+
+
+func BlackfridayTex(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error) {
+	renderer := blackfriday.LatexRenderer(0)
+    return blackfridayCommon(renderer, outputDir, cmakeFile, progress)
 }
 
 func init() {

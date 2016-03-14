@@ -81,12 +81,16 @@ func All(targetType0 string, outputDir0 string, showProgress0 bool, filterDocume
 				Markdown(outputDir, cmakeFile, bar)
 			case "html":
 				HTML(outputDir, cmakeFile, bar)
+			case "blackfridaytex":
+				BlackfridayTex(outputDir, cmakeFile, bar)
 			case "blackfriday":
-				Blackfriday(outputDir, cmakeFile, bar)
+				BlackfridayHTML(outputDir, cmakeFile, bar)
 			case "rtf":
 				RTF(outputDir, cmakeFile, bar)
 			case "opendocument":
 				OpenDocument(outputDir, cmakeFile, bar)
+			case "docx":
+				Docx(outputDir, cmakeFile, bar)
 			default:
 				log.Panic("Does not understand how to make " + targetType +
 					". Valid target types are pdf, html, blackfriday, markdown, rtf, and opendocument.")
