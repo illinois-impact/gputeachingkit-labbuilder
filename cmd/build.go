@@ -67,7 +67,7 @@ func init() {
 	}
 	buildCmd.AddCommand(&cobra.Command{
 		Use:   "all [./path/to/GPUTeachingKit-Labs] -o targetdir",
-		Short: "Build the lab in PDF format.",
+		Short: "Build the lab using all format.",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			for format := range formats {
 				err := build.All(format, buildOutputDir, showProgress, filterDocument, args[0])
