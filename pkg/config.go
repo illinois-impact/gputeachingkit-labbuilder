@@ -18,7 +18,7 @@ var (
 		"pygments",
 		"--self-contained",
 	}
-	Config        = config{
+	Config = config{
 		IsFullTookit: true,
 	}
 )

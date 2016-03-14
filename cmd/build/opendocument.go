@@ -70,7 +70,7 @@ func OpenDocument(outputDir, cmakeFile string, progress *pb.ProgressBar) (string
 	}
 
 	incrementProgress(progress)
-    
+
 	return outFile, nil
 }
 
@@ -92,10 +92,9 @@ func Docx(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error)
 		return "", err
 	}
 	incrementProgress(progress)
-    
 
 	progressPostfix(progress, "Writing Docx file...")
-    
+
 	tmpDir := os.TempDir()
 	tmpOutFile := filepath.Join(tmpDir, "wgx-pandoc-docx-markdown.markdown")
 	ioutil.WriteFile(tmpOutFile, []byte(document+docxCopyright), 0644)

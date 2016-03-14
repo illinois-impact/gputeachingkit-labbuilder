@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/facebookgo/stack"
 	"github.com/fatih/color"
 	"gitlab.com/abduld/wgx-pandoc/cmd"

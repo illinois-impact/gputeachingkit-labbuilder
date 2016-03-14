@@ -16,7 +16,7 @@ import (
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/cheggaaa/pb"
-    "gitlab.com/abduld/wgx-md-frontmatter"
+	"gitlab.com/abduld/wgx-md-frontmatter"
 )
 
 func copyFile(trgt, src string) error {
