@@ -10,6 +10,7 @@ import (
 
 	"strings"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/cheggaaa/pb"
 	"github.com/k0kubun/pp"
 	"github.com/mattn/go-zglob"
@@ -106,8 +107,8 @@ func All(targetType0 string, outputDir0 string, showProgress0 bool, filterDocume
 }
 
 func init() {
-	log.SetLevel(log.DebugLevel)
 	if false {
+		log.SetLevel(logrus.DebugLevel)
 		pp.Println("dummy")
 	}
 }
