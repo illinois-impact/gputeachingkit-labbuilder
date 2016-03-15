@@ -1,6 +1,8 @@
 package: gitlab.com/abduld/wgx-pandoc
 import:
 - package: github.com/GeertJohan/go.rice
+  subpackages:
+  - embedded
 - package: github.com/Sirupsen/logrus
 - package: github.com/bugsnag/osext
 - package: github.com/cheggaaa/pb
@@ -16,6 +18,7 @@ import:
 - package: github.com/spf13/cobra
 - package: gitlab.com/abduld/wgx-log
 - package: gitlab.com/abduld/wgx-md-frontmatter
+- package: gitlab.com/abduld/wgx-path
 - package: gitlab.com/abduld/wgx-utils
 - package: golang.org/x/net
   subpackages:

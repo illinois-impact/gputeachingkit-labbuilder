@@ -10,11 +10,11 @@ import (
 
 	"strings"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/cheggaaa/pb"
 	"github.com/k0kubun/pp"
 	"github.com/mattn/go-zglob"
-	"github.com/mitchellh/go-homedir"
+	"gitlab.com/abduld/wgx-log"
+	wgxpath "gitlab.com/abduld/wgx-path"
 )
 
 var (
@@ -27,13 +27,12 @@ func All(targetType0 string, outputDir0 string, showProgress0 bool, filterDocume
 	showProgress = showProgress0
 	filterDocument = filterDocument0
 	targetType = strings.ToLower(targetType0)
-	rootDir, _ := homedir.Expand(inputDir)
+	rootDir, _ := wgxpath.Expand(inputDir)
 	matches, err := zglob.Glob(filepath.Join(rootDir, "**", "sources.cmake"))
 	if err != nil {
 		return err
 	}
-	outputDir, _ := homedir.Expand(outputDir0)
-	outputDir, _ = filepath.Abs(outputDir)
+	outputDir, _ := wgxpath.Expand(outputDir0)
 	if err := os.MkdirAll(outputDir, 0755); err != nil {
 		log.WithField("output", outputDir).Error("Cannot create output directory")
 		return err
