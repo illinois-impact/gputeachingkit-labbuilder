@@ -5,8 +5,9 @@ type config struct {
 }
 
 const (
+	// eval and full are now the same when released
 	BitbucketURLEval = "https://bitbucket.org/hwuligans/gputeachingkit-labs/src/master/"
-	BitbucketURLFull = "https://bitbucket.org/hwuligans/gputeachingkit-labs-full/src/master/"
+	BitbucketURLFull = "https://bitbucket.org/hwuligans/gputeachingkit-labs/src/master/"
 
 	MarkdownFormat = "markdown+hard_line_breaks+pandoc_title_block+lists_without_preceding_blankline+" +
 		"compact_definition_lists+simple_tables+table_captions"
