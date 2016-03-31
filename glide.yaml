@@ -1,4 +1,4 @@
-package: gitlab.com/abduld/wgx-pandoc
+package: src/gitlab.com/abduld/wgx-pandoc
 import:
 - package: github.com/GeertJohan/go.rice
   subpackages:
