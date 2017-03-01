@@ -1,25 +1,30 @@
-package: src/gitlab.com/abduld/wgx-pandoc
+package: gitlab.com/abduld/wgx-pandoc
 import:
 - package: github.com/GeertJohan/go.rice
   subpackages:
   - embedded
 - package: github.com/Sirupsen/logrus
+  version: ~0.11.4
+- package: github.com/Unknwon/com
+  version: ~1.0.0
 - package: github.com/bugsnag/osext
 - package: github.com/cheggaaa/pb
+  version: ~1.0.7
 - package: github.com/facebookgo/stack
 - package: github.com/fatih/color
+  version: ~1.4.0
 - package: github.com/k0kubun/pp
+  version: ~2.3.0
 - package: github.com/mattn/go-zglob
 - package: github.com/mitchellh/go-homedir
+- package: github.com/rai-project/logger
 - package: github.com/russross/blackfriday
+  version: ~1.4.0
 - package: github.com/sethgrid/curse
 - package: github.com/shurcooL/github_flavored_markdown
 - package: github.com/spf13/cast
 - package: github.com/spf13/cobra
-- package: gitlab.com/abduld/wgx-log
 - package: gitlab.com/abduld/wgx-md-frontmatter
-- package: gitlab.com/abduld/wgx-path
-- package: gitlab.com/abduld/wgx-utils
 - package: golang.org/x/net
   subpackages:
   - context

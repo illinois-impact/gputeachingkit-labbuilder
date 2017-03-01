@@ -6,8 +6,8 @@ import (
 
 	"strings"
 
+	log "github.com/rai-project/logger"
 	"github.com/spf13/cobra"
-	"gitlab.com/abduld/wgx-log"
 	"gitlab.com/abduld/wgx-pandoc/cmd/build"
 )
 

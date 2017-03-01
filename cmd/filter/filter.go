@@ -9,10 +9,10 @@ import (
 	"path/filepath"
 
 	log "github.com/Sirupsen/logrus"
+	"github.com/Unknwon/com"
 	"github.com/mitchellh/go-homedir"
 	"gitlab.com/abduld/wgx-pandoc/pkg"
 	pf "gitlab.com/abduld/wgx-pandoc/pkg/pandocfilter"
-	"gitlab.com/abduld/wgx-utils"
 )
 
 func toJSON(inputFilePath string) (string, error) {
@@ -87,7 +87,7 @@ func Filter(outputFileDir, inputFilePath string, format string) (string, error) 
 	log.Debug("Input file is set to " + inputFilePath)
 	log.Debug("Output file is set to " + outputFilePath)
 
-	if !utils.IsFile(inputFilePath) {
+	if !com.IsFile(inputFilePath) {
 		return "", errors.New("input file does not exist")
 	}
 
