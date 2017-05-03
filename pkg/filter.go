@@ -4,7 +4,7 @@ import (
 	"sync"
 
 	"github.com/Sirupsen/logrus"
-	pf "gitlab.com/abduld/wgx-pandoc/pkg/pandocfilter"
+	pf "bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg/pandocfilter"
 	"golang.org/x/net/context"
 )
 

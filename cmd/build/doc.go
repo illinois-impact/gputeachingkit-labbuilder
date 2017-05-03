@@ -14,7 +14,7 @@ import (
 	"github.com/Unknwon/com"
 	"github.com/cheggaaa/pb"
 	"github.com/mitchellh/go-homedir"
-	"gitlab.com/abduld/wgx-pandoc/cmd/filter"
+	"bitbucket.org/hwuligans/gputeachingkit-labbuilder/cmd/filter"
 )
 
 func (d *doc) markdown() (string, error) {

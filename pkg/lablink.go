@@ -3,7 +3,7 @@ package pandoc
 import (
 	"strconv"
 
-	pf "gitlab.com/abduld/wgx-pandoc/pkg/pandocfilter"
+	pf "bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg/pandocfilter"
 )
 
 func LabLinkFilter(k string, v interface{}, format string, meta interface{}) interface{} {

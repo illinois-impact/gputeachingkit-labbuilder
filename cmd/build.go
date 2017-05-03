@@ -8,7 +8,7 @@ import (
 
 	log "github.com/rai-project/logger"
 	"github.com/spf13/cobra"
-	"gitlab.com/abduld/wgx-pandoc/cmd/build"
+	"bitbucket.org/hwuligans/gputeachingkit-labbuilder/cmd/build"
 )
 
 var (

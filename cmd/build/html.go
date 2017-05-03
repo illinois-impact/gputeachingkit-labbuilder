@@ -10,7 +10,7 @@ import (
 	"strconv"
 
 	"github.com/cheggaaa/pb"
-	"gitlab.com/abduld/wgx-pandoc/pkg"
+	"bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg"
 )
 
 func HTML(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error) {

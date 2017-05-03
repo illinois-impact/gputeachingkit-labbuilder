@@ -3,7 +3,7 @@ box: golang
 build:
   steps:
     - setup-go-workspace:
-        package-dir: gitlab.com/abduld/wgx-pandoc
+        package-dir: bitbucket.org/hwuligans/gputeachingkit-labbuilder
 
     # Build the project
     - script:

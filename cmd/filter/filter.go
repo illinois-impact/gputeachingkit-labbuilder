@@ -11,8 +11,8 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/Unknwon/com"
 	"github.com/mitchellh/go-homedir"
-	"gitlab.com/abduld/wgx-pandoc/pkg"
-	pf "gitlab.com/abduld/wgx-pandoc/pkg/pandocfilter"
+	"bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg"
+	pf "bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg/pandocfilter"
 )
 
 func toJSON(inputFilePath string) (string, error) {

@@ -6,7 +6,7 @@ import (
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/spf13/cobra"
-	"gitlab.com/abduld/wgx-pandoc/cmd/filter"
+	"bitbucket.org/hwuligans/gputeachingkit-labbuilder/cmd/filter"
 )
 
 var (

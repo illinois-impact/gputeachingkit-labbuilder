@@ -13,7 +13,7 @@ import (
 	"github.com/bugsnag/osext"
 	"github.com/k0kubun/pp"
 	"github.com/spf13/cast"
-	pf "gitlab.com/abduld/wgx-pandoc/pkg/pandocfilter"
+	pf "bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg/pandocfilter"
 )
 
 var (

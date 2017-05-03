@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
+	"bitbucket.org/hwuligans/gputeachingkit-labbuilder/cmd"
 	"github.com/facebookgo/stack"
 	"github.com/fatih/color"
-	"gitlab.com/abduld/wgx-pandoc/cmd"
 )
 
 func main() {

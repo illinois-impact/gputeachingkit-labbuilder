@@ -1,4 +1,4 @@
-package: gitlab.com/abduld/wgx-pandoc
+package: bitbucket.org/hwuligans/gputeachingkit-labbuilder
 import:
 - package: github.com/GeertJohan/go.rice
   subpackages:
