@@ -1,0 +1,139 @@
+hash: 48b61b7a09efaee2a55d6bb779fe53614eda869bfbdb3617294746d54c919d23
+updated: 2017-05-03T12:32:02.696074544-05:00
+imports:
+- name: github.com/bugsnag/osext
+  version: 0dd3f918b21bec95ace9dc86c7e70266cfc5c702
+- name: github.com/cheggaaa/pb
+  version: b6229822fa186496fcbf34111237e7a9693c6971
+- name: github.com/daaku/go.zipexe
+  version: a5fe2436ffcb3236e175e5149162b41cd28bd27d
+- name: github.com/facebookgo/stack
+  version: 751773369052141c013c6e827a71e8f35c07879c
+- name: github.com/fatih/color
+  version: 9131ab34cf20d2f6d83fdc67168a5430d1c7dc23
+- name: github.com/fatih/structs
+  version: a720dfa8df582c51dee1b36feabb906bde1588bd
+- name: github.com/fsnotify/fsnotify
+  version: 7d7316ed6e1ed2de075aab8dfc76de5d158d66e1
+- name: github.com/GeertJohan/go-sourcepath
+  version: 83e8b8723a9bf39481216e80575f4854c63ece4a
+- name: github.com/GeertJohan/go.rice
+  version: 9fdfd46f9806a9228aae341d65ab75c5235c383c
+  subpackages:
+  - embedded
+- name: github.com/hashicorp/hcl
+  version: 630949a3c5fa3c613328e1b8256052cbc2327c9b
+  subpackages:
+  - hcl/ast
+  - hcl/parser
+  - hcl/scanner
+  - hcl/strconv
+  - hcl/token
+  - json/parser
+  - json/scanner
+  - json/token
+- name: github.com/inconshreveable/mousetrap
+  version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
+- name: github.com/k0kubun/pp
+  version: 027a6d1765d673d337e687394dbe780dd64e2a1e
+- name: github.com/kardianos/osext
+  version: c2c54e542fb797ad986b31721e1baedf214ca413
+- name: github.com/kless/term
+  version: e551c64f56c0ac0469b4db1b70918e05bfd3ab20
+- name: github.com/magiconair/properties
+  version: b3b15ef068fd0b17ddf408a23669f20811d194d2
+- name: github.com/mattn/go-colorable
+  version: 5411d3eea5978e6cdc258b30de592b60df6aba96
+  repo: https://github.com/mattn/go-colorable
+- name: github.com/mattn/go-isatty
+  version: 57fdcb988a5c543893cc61bce354a6e24ab70022
+  repo: https://github.com/mattn/go-isatty
+- name: github.com/mattn/go-runewidth
+  version: 14207d285c6c197daabb5c9793d63e7af9ab2d50
+- name: github.com/mattn/go-zglob
+  version: 2dbd7f37a45e993d5180a251b4bdd314d6333b70
+- name: github.com/microcosm-cc/bluemonday
+  version: e79763773ab6222ca1d5a7cbd9d62d83c1f77081
+- name: github.com/mitchellh/go-homedir
+  version: b8bc1bf767474819792c23f32d8286a45736f1c6
+- name: github.com/mitchellh/mapstructure
+  version: 482a9fd5fa83e8c4e7817413b80f3eb8feec03ef
+- name: github.com/pelletier/go-buffruneio
+  version: c37440a7cf42ac63b919c752ca73a85067e05992
+- name: github.com/pelletier/go-toml
+  version: 13d49d4606eb801b8f01ae542b4afc4c6ee3d84a
+- name: github.com/rai-project/config
+  version: 441c961e45feb6c039a69d57b5f58085c8a64cb6
+- name: github.com/rai-project/godotenv
+  version: 726cc8b906e3d31c70a9671c90a13716a8d3f50d
+- name: github.com/rai-project/logger
+  version: 03818fe07fa7d04ed67bb0a30bba6fa771c216a6
+- name: github.com/rai-project/vipertags
+  version: 9c71f81fd78302f0665e1d180c506d26a19f226a
+- name: github.com/russross/blackfriday
+  version: 0b647d0506a698cca42caca173e55559b12a69f2
+- name: github.com/sergi/go-diff
+  version: feef008d51ad2b3778f85d387ccf91735543008d
+  subpackages:
+  - diffmatchpatch
+- name: github.com/sethgrid/curse
+  version: 3378651548d4bda6a856c69719d593d902ec8b21
+- name: github.com/shurcooL/github_flavored_markdown
+  version: 3c64cb3ce00a3f4feae0c53ce7c2cc2fdacba14b
+- name: github.com/shurcooL/highlight_diff
+  version: d3b292edd8c8311b9d264e3adc26cdf39695fe9b
+- name: github.com/shurcooL/highlight_go
+  version: 7867c2dec5d03326c952ca98eda2abf907ddfcf3
+- name: github.com/shurcooL/octiconssvg
+  version: 1aed2117d2aa8eed76a052936e468e5354750701
+- name: github.com/shurcooL/sanitized_anchor_name
+  version: 79c90efaf01eddc01945af5bc1797859189b830b
+- name: github.com/Sirupsen/logrus
+  version: ba1b36c82c5e05c4f912a88eab0dcd91a171688f
+  subpackages:
+  - hooks/syslog
+- name: github.com/sourcegraph/annotate
+  version: f4cad6c6324d3f584e1743d8b3e0e017a5f3a636
+- name: github.com/sourcegraph/syntaxhighlight
+  version: c95ac474b7cb9c711f4591b553a2caaa24ea3d37
+- name: github.com/spf13/afero
+  version: 9be650865eab0c12963d8753212f4f9c66cdcf12
+  subpackages:
+  - mem
+- name: github.com/spf13/cast
+  version: acbeb36b902d72a7a4c18e8f3241075e7ab763e4
+- name: github.com/spf13/cobra
+  version: 8f0203be891287870100e4af46262cdf4a4261d1
+- name: github.com/spf13/jwalterweatherman
+  version: fa7ca7e836cf3a8bb4ebf799f472c12d7e903d66
+- name: github.com/spf13/pflag
+  version: 5644820622454e71517561946e3d94b9f9db6842
+- name: github.com/spf13/viper
+  version: 7538d73b4eb9511d85a9f1dfef202eeb8ac260f4
+- name: github.com/tredoe/term
+  version: e551c64f56c0ac0469b4db1b70918e05bfd3ab20
+  subpackages:
+  - sys
+- name: github.com/Unknwon/com
+  version: 28b053d5a2923b87ce8c5a08f3af779894a72758
+- name: gitlab.com/abduld/wgx-md-frontmatter
+  version: e98574f841355713ee21f8bf0c60ad7286a8f9b9
+- name: golang.org/x/net
+  version: 4876518f9e71663000c348837735820161a42df7
+  subpackages:
+  - context
+  - html
+  - html/atom
+- name: golang.org/x/sys
+  version: e24f485414aeafb646f6fca458b0bf869c0880a1
+  repo: https://go.googlesource.com/sys
+  subpackages:
+  - unix
+- name: golang.org/x/text
+  version: f28f36722d5ef2f9655ad3de1f248e3e52ad5ebd
+  subpackages:
+  - transform
+  - unicode/norm
+- name: gopkg.in/yaml.v2
+  version: bef53efd0c76e49e6de55ead051f886bea7e9420
+testImports: []
