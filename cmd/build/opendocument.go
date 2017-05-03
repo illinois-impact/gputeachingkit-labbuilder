@@ -42,7 +42,7 @@ func OpenDocument(outputDir, cmakeFile string, progress *pb.ProgressBar) (string
 	outFile := filepath.Join(outputDir, "Module["+strconv.Itoa(doc.Module)+"]-"+doc.FileName+".odt")
 
 	tmpDir := os.TempDir()
-	tmpOutFile := filepath.Join(tmpDir, "wgx-pandoc-markdown.markdown")
+	tmpOutFile := filepath.Join(tmpDir, "gputeachingkit-labbuilder-markdown.markdown")
 	ioutil.WriteFile(tmpOutFile, []byte(document), 0644)
 
 	args := []string{
@@ -96,7 +96,7 @@ func Docx(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error)
 	progressPostfix(progress, "Writing Docx file...")
 
 	tmpDir := os.TempDir()
-	tmpOutFile := filepath.Join(tmpDir, "wgx-pandoc-docx-markdown.markdown")
+	tmpOutFile := filepath.Join(tmpDir, "gputeachingkit-labbuilder-docx-markdown.markdown")
 	ioutil.WriteFile(tmpOutFile, []byte(document+docxCopyright), 0644)
 	outFile := filepath.Join(outputDir, "Module["+strconv.Itoa(doc.Module)+"]-"+doc.FileName+".docx")
 

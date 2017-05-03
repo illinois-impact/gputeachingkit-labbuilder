@@ -35,7 +35,7 @@ func RTF(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error) 
 	outFile := filepath.Join(outputDir, "Module["+strconv.Itoa(doc.Module)+"]-"+doc.FileName+".rtf")
 
 	tmpDir := os.TempDir()
-	tmpOutFile := filepath.Join(tmpDir, "wgx-pandoc-markdown.md")
+	tmpOutFile := filepath.Join(tmpDir, "gputeachingkit-labbuilder-markdown.md")
 	ioutil.WriteFile(tmpOutFile, []byte(document), 0644)
 
 	args := []string{

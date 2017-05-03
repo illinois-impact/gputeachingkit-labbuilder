@@ -14,7 +14,7 @@ import (
 var (
 	verbose string
 	RootCmd = &cobra.Command{
-		Use:   "wgx-pandoc",
+		Use:   "gputeachingkit-labbuilder",
 		Short: "Helper tools to build lab documentations and interact with pandoc",
 	}
 )

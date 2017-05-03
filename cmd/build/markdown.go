@@ -35,7 +35,7 @@ func Markdown(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, er
 	outFile := filepath.Join(outputDir, "Module["+strconv.Itoa(doc.Module)+"]-"+doc.FileName+".md")
 
 	tmpDir := os.TempDir()
-	tmpOutFile := filepath.Join(tmpDir, "wgx-pandoc-markdown.md")
+	tmpOutFile := filepath.Join(tmpDir, "gputeachingkit-labbuilder-markdown.md")
 	ioutil.WriteFile(tmpOutFile, []byte(document), 0644)
 	args := []string{
 		"-s",

@@ -23,7 +23,7 @@ var (
 )
 
 func init() {
-	tmpDir, _ := ioutil.TempDir("", "wgx-pandoc-assets")
+	tmpDir, _ := ioutil.TempDir("", "gputeachingkit-labbuilder-assets")
 
 	latexTemplateBox := rice.MustFindBox("./../../_fixtures/templates/latex")
 	htmlTemplateBox := rice.MustFindBox("./../../_fixtures/templates/html")

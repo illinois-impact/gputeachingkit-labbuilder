@@ -31,7 +31,7 @@ func (d *doc) markdown() (string, error) {
 	}
 
 	if filterDocument {
-		tmpDir, err := ioutil.TempDir("", "wgx-pandoc")
+		tmpDir, err := ioutil.TempDir("", "gputeachingkit-labbuilder")
 		if err != nil {
 			return "", err
 		}
