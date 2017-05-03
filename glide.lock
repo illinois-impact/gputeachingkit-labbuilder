@@ -116,7 +116,7 @@ imports:
   - sys
 - name: github.com/Unknwon/com
   version: 28b053d5a2923b87ce8c5a08f3af779894a72758
-- name: gitlab.com/abduld/wgx-md-frontmatter
+- name: bitbucket.org/hwuligans/wgx-md-frontmatter
   version: e98574f841355713ee21f8bf0c60ad7286a8f9b9
 - name: golang.org/x/net
   version: 4876518f9e71663000c348837735820161a42df7

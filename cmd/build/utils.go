@@ -12,11 +12,12 @@ import (
 	"strings"
 	"time"
 
+	frontmatter "gitlab.com/abduld/wgx-md-frontmatter"
+
 	"gopkg.in/yaml.v2"
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/cheggaaa/pb"
-	"gitlab.com/abduld/wgx-md-frontmatter"
 )
 
 func copyFile(trgt, src string) error {

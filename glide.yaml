@@ -25,7 +25,7 @@ import:
 - package: github.com/spf13/cast
   version: ~1.1.0
 - package: github.com/spf13/cobra
-- package: gitlab.com/abduld/wgx-md-frontmatter
+- package: bitbucket.org/hwuligans/wgx-md-frontmatter
 - package: golang.org/x/net
   subpackages:
   - context
