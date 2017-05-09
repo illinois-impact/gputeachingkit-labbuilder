@@ -10,11 +10,11 @@ import (
 	"bytes"
 	"text/template"
 
+	"bitbucket.org/hwuligans/gputeachingkit-labbuilder/cmd/filter"
 	log "github.com/Sirupsen/logrus"
 	"github.com/Unknwon/com"
 	"github.com/cheggaaa/pb"
 	"github.com/mitchellh/go-homedir"
-	"bitbucket.org/hwuligans/gputeachingkit-labbuilder/cmd/filter"
 )
 
 func (d *doc) markdown() (string, error) {
@@ -146,6 +146,7 @@ func makeDoc(outputDir, cmakeFile string, progress *pb.ProgressBar) (*doc, error
 	progressPostfix(progress, "Getting lab frontmatter ...")
 	frontMatter := getFrontMatter(string(description))
 	if frontMatter == "" {
+		println(string(description))
 		progress.FinishPrint("✖ Failed " + fileName + " while getting the lab front matter.")
 		return nil, err
 	}

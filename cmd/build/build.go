@@ -55,7 +55,7 @@ func All(targetType0 string, outputDir0 string, showProgress0 bool, filterDocume
 		func() {
 			defer wg.Done()
 			if !path.IsAbs(cmakeFile) {
-				cmakeFile = path.Join(rootDir, cmakeFile)
+				cmakeFile, _ = filepath.Abs(cmakeFile)
 			}
 			if !isCmakeLab(cmakeFile) {
 				return

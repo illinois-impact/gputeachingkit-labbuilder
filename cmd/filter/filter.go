@@ -8,11 +8,11 @@ import (
 	"os/exec"
 	"path/filepath"
 
+	"bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg"
+	pf "bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg/pandocfilter"
 	log "github.com/Sirupsen/logrus"
 	"github.com/Unknwon/com"
 	"github.com/mitchellh/go-homedir"
-	"bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg"
-	pf "bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg/pandocfilter"
 )
 
 func toJSON(inputFilePath string) (string, error) {
@@ -73,10 +73,38 @@ func isMarkdownExt(pth string) bool {
 		filepath.Ext(pth) == ".md"
 }
 
+type pandocJSON struct {
+	Blocks []struct {
+		T string        `json:"t"`
+		C []interface{} `json:"c"`
+	} `json:"blocks"`
+	PandocAPIVersion []int `json:"pandoc-api-version"`
+	Meta             struct {
+		Module struct {
+			T string `json:"t"`
+			C string `json:"c"`
+		} `json:"module"`
+		Author struct {
+			T string `json:"t"`
+			C []struct {
+				T string `json:"t"`
+				C string `json:"c,omitempty"`
+			} `json:"c"`
+		} `json:"author"`
+		Title struct {
+			T string `json:"t"`
+			C []struct {
+				T string `json:"t"`
+				C string `json:"c,omitempty"`
+			} `json:"c"`
+		} `json:"title"`
+	} `json:"meta"`
+}
+
 func Filter(outputFileDir, inputFilePath string, format string) (string, error) {
 
 	var (
-		doc               interface{}
+		doc               pandocJSON
 		jsonInputFilePath string
 	)
 
@@ -113,11 +141,12 @@ func Filter(outputFileDir, inputFilePath string, format string) (string, error) 
 		return "", err
 	}
 
-	meta := doc.([]interface{})[0].(map[string]interface{})["unMeta"]
+	meta := doc.Meta
+	var ndoc interface{}
 	for _, filter := range pandoc.Filters {
-		doc = pf.Walk(doc, filter, format, meta)
+		ndoc = pf.Walk(doc, filter, format, meta)
 	}
-	b, err := json.Marshal(doc)
+	b, err := json.Marshal(ndoc)
 	if err != nil {
 		return "", err
 	}
