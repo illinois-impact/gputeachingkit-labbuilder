@@ -1,4 +1,4 @@
-//go:generate rice go-embed
+//go:generate rice embed-go
 package pandoc
 
 import "github.com/GeertJohan/go.rice"
