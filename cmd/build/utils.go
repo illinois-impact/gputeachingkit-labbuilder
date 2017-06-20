@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	frontmatter "gitlab.com/webgpu/wgx-md-frontmatter"
+	frontmatter "github.com/webgpu/wgx-md-frontmatter"
 
 	"gopkg.in/yaml.v2"
 
