@@ -1,11 +1,13 @@
+//go:generate rice embed-go -i ./cmd/build -i ./pkg
+
 package main
 
 import (
 	"fmt"
 
-	"github.com/webgpu/gputeachingkit-labbuilder/cmd"
 	"github.com/facebookgo/stack"
 	"github.com/fatih/color"
+	"github.com/webgpu/gputeachingkit-labbuilder/cmd"
 )
 
 func main() {

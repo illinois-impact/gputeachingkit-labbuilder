@@ -1,0 +1,31 @@
+---
+{{ .FrontMatter }}
+---
+
+<Description>
+{{ .Description }}
+</Description>
+
+<Questions>
+{{range .QuestionAnswers}}
+    <QuestionItem>
+        <Question>
+            {{.Question}}
+        </Question>
+        <Answer>
+            {{.Answer}}
+        </Answer>
+    </QuestionItem>
+{{end}}
+</Questions>
+
+
+<CodeTemplate>
+    {{.CodeTemplate}}
+</CodeTemplate>
+
+
+<CodeSolution>
+    {{.CodeSolution}}
+</CodeSolution>
+

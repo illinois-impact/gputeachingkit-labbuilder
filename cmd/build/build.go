@@ -10,12 +10,12 @@ import (
 
 	"strings"
 
-	"github.com/sirupsen/logrus"
 	"github.com/cheggaaa/pb"
 	"github.com/k0kubun/pp"
 	"github.com/mattn/go-zglob"
 	homedir "github.com/mitchellh/go-homedir"
 	log "github.com/rai-project/logger"
+	"github.com/sirupsen/logrus"
 )
 
 var (
@@ -79,6 +79,8 @@ func All(targetType0 string, outputDir0 string, showProgress0 bool, filterDocume
 				PDF(outputDir, cmakeFile, bar)
 			case "markdown":
 				Markdown(outputDir, cmakeFile, bar)
+			case "marksy":
+				MarksyText(outputDir, cmakeFile, bar)
 			case "html":
 				HTML(outputDir, cmakeFile, bar)
 			case "blackfridaytex":

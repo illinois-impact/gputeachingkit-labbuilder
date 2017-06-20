@@ -22,6 +22,7 @@ var (
 		"html":        []string{"web"},
 		"docx":        []string{"word"},
 		"markdown":    []string{"md"},
+		"marksy":      []string{},
 		"blackfriday": []string{"basichtml"},
 		"blackfridaytex": []string{
 			"tex",

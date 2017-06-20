@@ -1,5 +1,3 @@
-//go:generate rice embed-go
-
 package build
 
 import (
@@ -14,6 +12,7 @@ var (
 	texTemplate             = box.MustString("md.template")
 	markdownTexTemplate     = box.MustString("tex.template")
 	markdownRegularTemplate = box.MustString("md.template")
+	markdownMarksyTemplate  = box.MustString("mdmarksy.template")
 
 	latexTemplateResources map[string]resource
 	htmlTemplate           resource

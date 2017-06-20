@@ -10,24 +10,32 @@ import (
 	"bytes"
 	"text/template"
 
-	"github.com/webgpu/gputeachingkit-labbuilder/cmd/filter"
-	log "github.com/sirupsen/logrus"
 	"github.com/Unknwon/com"
 	"github.com/cheggaaa/pb"
 	"github.com/mitchellh/go-homedir"
+	log "github.com/sirupsen/logrus"
+	"github.com/webgpu/gputeachingkit-labbuilder/cmd/filter"
 )
 
 func (d *doc) markdown() (string, error) {
-	var document bytes.Buffer
-	var tmpl *template.Template
-	if targetType == "pdf" {
-		tmpl = template.Must(template.New(d.Name + "_tex_template").Parse(markdownTexTemplate))
-	} else {
-		tmpl = template.Must(template.New(d.Name + "_template").Parse(markdownRegularTemplate))
+	var templateString string
+	switch targetType {
+	case "pdf":
+		templateString = markdownTexTemplate
+	case "marksy":
+		templateString = markdownMarksyTemplate
+	default:
+		templateString = markdownRegularTemplate
 	}
+	tmpl := template.Must(template.New(d.Name + "_template").Parse(templateString))
+	var document bytes.Buffer
 	err := tmpl.Execute(&document, d)
 	if err != nil {
 		return "", err
+	}
+
+	if targetType == "marksy" {
+		return document.String(), nil
 	}
 
 	if filterDocument {

@@ -30,3 +30,5 @@ node_modules
 vendor/
 test
 gputeachingkit-labbuilder
+gputeachingkit-labs
+build
