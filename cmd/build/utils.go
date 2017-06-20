@@ -12,12 +12,12 @@ import (
 	"strings"
 	"time"
 
-	frontmatter "gitlab.com/abduld/wgx-md-frontmatter"
+	frontmatter "gitlab.com/webgpu/wgx-md-frontmatter"
 
 	"gopkg.in/yaml.v2"
 
-	log "github.com/sirupsen/logrus"
 	"github.com/cheggaaa/pb"
+	log "github.com/sirupsen/logrus"
 )
 
 func copyFile(trgt, src string) error {
