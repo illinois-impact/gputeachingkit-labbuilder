@@ -3,27 +3,26 @@ import:
 - package: github.com/GeertJohan/go.rice
   subpackages:
   - embedded
-- package: github.com/sirupsen/logrus
-  version: ^1.0.0
 - package: github.com/Unknwon/com
-  version: ~1.0.0
+  version: v1
 - package: github.com/bugsnag/osext
 - package: github.com/cheggaaa/pb
-  version: ~1.0.13
+  version: v2.0.4
 - package: github.com/facebookgo/stack
 - package: github.com/fatih/color
-  version: ~1.4.1
 - package: github.com/k0kubun/pp
-  version: ~2.3.0
+  version: v2.3.0
 - package: github.com/mattn/go-zglob
 - package: github.com/mitchellh/go-homedir
 - package: github.com/rai-project/logger
 - package: github.com/russross/blackfriday
-  version: ~1.4.0
+  version: v1.4
 - package: github.com/sethgrid/curse
 - package: github.com/shurcooL/github_flavored_markdown
+- package: github.com/sirupsen/logrus
+  version: ^1.0.0
 - package: github.com/spf13/cast
-  version: ~1.1.0
+  version: v1.1.0
 - package: github.com/spf13/cobra
 - package: github.com/webgpu/wgx-md-frontmatter
 - package: golang.org/x/net
