@@ -1,9 +1,9 @@
 package pandoc
 
 import (
-	"github.com/Sirupsen/logrus"
 	"github.com/k0kubun/pp"
-	pf "bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg/pandocfilter"
+	"github.com/sirupsen/logrus"
+	pf "github.com/webgpu/gputeachingkit-labbuilder/pkg/pandocfilter"
 	"golang.org/x/net/context"
 )
 

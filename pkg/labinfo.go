@@ -4,9 +4,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 	"github.com/k0kubun/pp"
-	pf "bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg/pandocfilter"
+	pf "github.com/webgpu/gputeachingkit-labbuilder/pkg/pandocfilter"
 	"golang.org/x/net/context"
 )
 

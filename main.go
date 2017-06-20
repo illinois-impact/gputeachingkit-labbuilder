@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"bitbucket.org/hwuligans/gputeachingkit-labbuilder/cmd"
+	"github.com/webgpu/gputeachingkit-labbuilder/cmd"
 	"github.com/facebookgo/stack"
 	"github.com/fatih/color"
 )

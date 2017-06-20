@@ -3,7 +3,7 @@ box: golang
 build:
   steps:
     - setup-go-workspace:
-        package-dir: bitbucket.org/hwuligans/gputeachingkit-labbuilder
+        package-dir: github.com/webgpu/gputeachingkit-labbuilder
 
     # Build the project
     - script:

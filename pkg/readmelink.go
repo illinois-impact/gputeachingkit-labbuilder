@@ -1,7 +1,7 @@
 package pandoc
 
 import (
-	pf "bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg/pandocfilter"
+	pf "github.com/webgpu/gputeachingkit-labbuilder/pkg/pandocfilter"
 )
 
 func ReadmeLinkFilter(k string, v interface{}, format string, meta interface{}) interface{} {

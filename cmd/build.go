@@ -8,7 +8,7 @@ import (
 
 	log "github.com/rai-project/logger"
 	"github.com/spf13/cobra"
-	"bitbucket.org/hwuligans/gputeachingkit-labbuilder/cmd/build"
+	"github.com/webgpu/gputeachingkit-labbuilder/cmd/build"
 )
 
 var (

@@ -8,9 +8,9 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg"
-	pf "bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg/pandocfilter"
-	log "github.com/Sirupsen/logrus"
+	"github.com/webgpu/gputeachingkit-labbuilder/pkg"
+	pf "github.com/webgpu/gputeachingkit-labbuilder/pkg/pandocfilter"
+	log "github.com/sirupsen/logrus"
 	"github.com/Unknwon/com"
 	"github.com/mitchellh/go-homedir"
 )

@@ -1,10 +1,10 @@
-package: bitbucket.org/hwuligans/gputeachingkit-labbuilder
+package: github.com/webgpu/gputeachingkit-labbuilder
 import:
 - package: github.com/GeertJohan/go.rice
   subpackages:
   - embedded
-- package: github.com/Sirupsen/logrus
-  version: ~0.11.5
+- package: github.com/sirupsen/logrus
+  version: ^1.0.0
 - package: github.com/Unknwon/com
   version: ~1.0.0
 - package: github.com/bugsnag/osext
@@ -25,7 +25,7 @@ import:
 - package: github.com/spf13/cast
   version: ~1.1.0
 - package: github.com/spf13/cobra
-- package: bitbucket.org/hwuligans/wgx-md-frontmatter
+- package: github.com/webgpu/wgx-md-frontmatter
 - package: golang.org/x/net
   subpackages:
   - context

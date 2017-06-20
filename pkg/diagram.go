@@ -8,12 +8,12 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 	"github.com/Unknwon/com"
 	"github.com/bugsnag/osext"
 	"github.com/k0kubun/pp"
 	"github.com/spf13/cast"
-	pf "bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg/pandocfilter"
+	pf "github.com/webgpu/gputeachingkit-labbuilder/pkg/pandocfilter"
 )
 
 var (

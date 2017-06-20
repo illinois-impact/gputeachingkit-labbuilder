@@ -10,7 +10,7 @@ import (
 
 	"strings"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 	"github.com/cheggaaa/pb"
 	"github.com/k0kubun/pp"
 	"github.com/mattn/go-zglob"

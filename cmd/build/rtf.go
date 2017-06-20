@@ -10,7 +10,7 @@ import (
 	"strconv"
 
 	"github.com/cheggaaa/pb"
-	"bitbucket.org/hwuligans/gputeachingkit-labbuilder/pkg"
+	"github.com/webgpu/gputeachingkit-labbuilder/pkg"
 )
 
 func RTF(outputDir, cmakeFile string, progress *pb.ProgressBar) (string, error) {

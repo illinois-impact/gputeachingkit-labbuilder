@@ -4,9 +4,9 @@ import (
 	"errors"
 	"os"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-	"bitbucket.org/hwuligans/gputeachingkit-labbuilder/cmd/filter"
+	"github.com/webgpu/gputeachingkit-labbuilder/cmd/filter"
 )
 
 var (

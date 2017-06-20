@@ -10,8 +10,8 @@ import (
 	"bytes"
 	"text/template"
 
-	"bitbucket.org/hwuligans/gputeachingkit-labbuilder/cmd/filter"
-	log "github.com/Sirupsen/logrus"
+	"github.com/webgpu/gputeachingkit-labbuilder/cmd/filter"
+	log "github.com/sirupsen/logrus"
 	"github.com/Unknwon/com"
 	"github.com/cheggaaa/pb"
 	"github.com/mitchellh/go-homedir"

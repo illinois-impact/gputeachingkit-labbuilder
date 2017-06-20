@@ -11,11 +11,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/hwuligans/gputeachingkit-labbuilder.git"
+    "url": "git+ssh://git@github.com/webgpu/gputeachingkit-labbuilder.git"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/hwuligans/gputeachingkit-labbuilder#readme",
+  "homepage": "https://github.com/webgpu/gputeachingkit-labbuilder#readme",
   "dependencies": {
     "mermaid": "^0.5.8",
     "phantomjs": "^1.9.19"

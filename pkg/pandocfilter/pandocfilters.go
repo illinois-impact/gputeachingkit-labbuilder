@@ -14,7 +14,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 )
 
 type Action func(string, interface{}, string, interface{}) interface{}
