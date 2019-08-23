@@ -15,7 +15,7 @@ ANSWER: \textcolor[rgb]{0.9,0.1,0.1}{\textbf{ {{.Answer}} } }
 
 # Code Template
 
-The following code is suggested as a starting point for students. The code handles the import and export as well as the checking of the solution. Students are expected to insert their code is the sections demarcated with `//@@`. Students expected the other code unchanged. The tutorial page describes the functionality of the `wb*` methods.
+The following code is suggested as a starting point for students. The code handles the import and export as well as the checking of the solution. Students are expected to insert their code is the sections demarcated with `//@@`. Students expected the other code unchanged. The tutorial page describes the functionality of the `wb*` methods. The libwb library, among other uses, is needed for UIUC's WebGPU development tool. The early goal of the Teaching Kit was to provide educators the option to use WebGPU, but that is no longer recommended.
 
 
 ```{.cpp .numberLines}
